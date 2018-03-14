@@ -10,4 +10,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
+    protected void loginBtnFn() {
+
+    }
+
+    protected void registerBtnFn() {
+
+    }
 }
