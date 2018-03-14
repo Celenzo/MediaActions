@@ -8,7 +8,6 @@ exports.display = function(req, res)
 
 exports.upload = function(req, res)
 {
-  console.log("bite");
   console.log(req.files);
   res.render('hub', {title: 'Upload'});
 
