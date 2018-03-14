@@ -8,12 +8,8 @@ const stripe = require("stripe")(keySecret);
 
 exports.stripe = function(req, res, next) {
 
-<<<<<<< Updated upstream
-    res.render('stripe', { title: 'Stripe'});
-};
-=======
-    console.log("keypublishable = " + keyPublishable);
-    console.log("keySecret = " + keySecret);
+    //console.log("keypublishable = " + keyPublishable);
+    //console.log("keySecret = " + keySecret);
     res.render('stripe', { publishableKey:keyPublishable});
 
 };
@@ -40,4 +36,3 @@ exports.charge = function(req, res, next) {
 exports.test = function(req, res, next) {
     res.render('stripe');
 };
->>>>>>> Stashed changes

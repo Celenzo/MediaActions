@@ -38,13 +38,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Urls et .js associés
 app.use('/', index);
 app.use('/', login);
-<<<<<<< Updated upstream
-app.use('/', stripe);
 app.use('/', hub);
-=======
 app.use('/stripe', stripe);
-//app.use('/', hub);
->>>>>>> Stashed changes
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
