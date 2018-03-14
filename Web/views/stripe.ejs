@@ -1,6 +1,16 @@
 <%- include layout.ejs %>
 
+<<<<<<< Updated upstream
 <h1><%= title %></h1>
 <p>Texte</p>
 
 <%- include footer.ejs %>
+=======
+<h1>Stripe</h1>
+<form action="/stripe/charge" method="post">
+    <article>
+        <label>Amount: $5.00</label>
+    </article>
+    <script class="stripe-button" src="https://checkout.stripe.com/checkout.js" data-key=<%= publishableKey %> data-locale="auto" data-description="Sample Charge" data-amount="500"></script>
+</form>
+>>>>>>> Stashed changes

@@ -3,7 +3,8 @@ var router = express.Router();
 
 var stripe_controller = require('../controllers/stripeController');
 
-/* GET home page. */
-router.get('/stripe', stripe_controller.stripe);
+router.get('/', stripe_controller.stripe);
+router.post('/charge', stripe_controller.charge);
+router.get('/charge', stripe_controller.test);
 
 module.exports = router;

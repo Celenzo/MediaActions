@@ -8,6 +8,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+process.env.PUBLISHABLE_key = "pk_test_ZJLG415DZJo8y12cI829uctz";
+process.env.SECRET_KEY = "sk_test_VUqtqxDUiVKKvNjw4nKX0vqf";
+
 var index = require('./routes/index');
 var login = require('./routes/login');
 var stripe = require('./routes/stripe');
@@ -16,6 +19,8 @@ var hub = require('./routes/hub');
 var app = express();
 var mongoDB = 'mongodb://admin:admin@ds239117.mlab.com:39117/db_media_actions';
 mongoose.connect(mongoDB);
+
+app.listen(4567);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,8 +38,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Urls et .js associés
 app.use('/', index);
 app.use('/', login);
+<<<<<<< Updated upstream
 app.use('/', stripe);
 app.use('/', hub);
+=======
+app.use('/stripe', stripe);
+//app.use('/', hub);
+>>>>>>> Stashed changes
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
