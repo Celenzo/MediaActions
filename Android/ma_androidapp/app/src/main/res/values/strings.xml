@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">ma_androidapp</string>
+<<<<<<< Updated upstream
     <string name="mainImgContentDesc">MEDIAAAAA ACTIONS</string>
     <string name="loginBtn">Login</string>
     <string name="registerBtnText">Register</string>
+=======
+    <string name="title_activity_upload_page">UploadPage</string>
+    <string name="title_activity_upload">UploadActivity</string>
+    <string name="upload_image_btn">Choose image</string>
+    <string name="uploadAddTag">Add tag</string>
+>>>>>>> Stashed changes
 </resources>
