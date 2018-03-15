@@ -43,7 +43,7 @@ exports.registration = function(req, res, next) {
 		res.render('login', {title: 'Connexion'});
 		//req.session.userId = user._id;
 		//return res.redirect('/login');
-
+      console.log("Marche");
 	    }
 	});
 

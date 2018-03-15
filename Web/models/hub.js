@@ -1,12 +1,48 @@
 var mongoose = require('mongoose');
 var HubSchema = new mongoose.Schema({
-  originalname : String,
-  mimetype : String,
-  destination : String,
-  filename : String,
-  path : String,
-  size : String,
-  date : { type : Date, default : Date.now }
+  originalname: {
+    type: String,
+    unique: false,
+    required: false,
+    trim: true
+  },
+  mimetype: {
+    type: String,
+    unique: false,
+    required: false,
+    trim: true
+  },
+  destination: {
+    type: String,
+    unique: false,
+    required: false,
+    trim: true
+  },
+  filename: {
+    type: String,
+    unique: false,
+    required: false,
+    trim: true
+  },
+  path: {
+    type: String,
+    unique: false,
+    required: false,
+    trim: true
+  },
+  size: {
+    type: String,
+    unique: false,
+    required: false,
+    trim: true
+  },
+  date: {
+    type : Date,
+    default : Date.now,
+    unique: false,
+    required: false,
+    trim: false
+  }
 });
 
 

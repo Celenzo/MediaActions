@@ -1,14 +1,44 @@
 var mongoose = require('mongoose');
 var Hub = require('../models/hub');
 
-exports.display = function(req, res)
+exports.display = function(req, res, next)
 {
   res.render('hub', {title: 'Upload'});
 };
 
-exports.upload = function(req, res)
+exports.upload = function(req, res, next)
 {
-  res.render('hub', {title: 'Upload'});
+  var hubData = {
+    originalname: req.files[0].originalname,
+    mimetype: req.files[0].mimetype,
+    destination: req.files[0].destination,
+    filename: req.files[0].filename,
+    path: req.files[0].path,
+    size: req.files[0].size,
+  }
+/*
+var hubData = {
+	    originalname: "pangolin",
+	}
+  */
+  Hub.create(hubData, function (error, hub) {
+    if (error) {
+      console.log("Msg : ");
+      console.log(error);
+    }
+    else{
+      console.log('Commentaire ajouté avec succès !');
+      console.log(hub);
+    }
+  });
+res.render('index', {title: 'Upload'});
+
+
+
+
+}
+
+  /*
 
   var datapicture = {
     originalname: req.files[0].originalname,
@@ -20,6 +50,7 @@ exports.upload = function(req, res)
   }
   //res.send(req.files.map);
   console.log(datapicture);
+
 
 
   var HubSchm = new mongoose.Schema({
@@ -51,4 +82,4 @@ exports.upload = function(req, res)
       throw err; }
     console.log('Instance ajoutée avec succès !');
   });
-};
+  */
