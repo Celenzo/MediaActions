@@ -7,9 +7,6 @@ var upload = multer({ dest: 'public/uploads/' })
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var GoogleStrategy = require('passport-google-oauth2').Strategy;
 
 process.env.PUBLISHABLE_KEY = "pk_test_ZJLG415DZJo8y12cI829uctz";
 process.env.SECRET_KEY = "sk_test_VUqtqxDUiVKKvNjw4nKX0vqf";
@@ -18,7 +15,7 @@ var index = require('./routes/index');
 var login = require('./routes/login');
 var stripe = require('./routes/stripe');
 var hub = require('./routes/hub');
-var User = require('./models/users');
+var gallery = require('./routes/gallery');
 
 var app = express();
 var mongoDB = 'mongodb://admin:admin@ds239117.mlab.com:39117/db_media_actions';
@@ -30,43 +27,6 @@ app.listen(4567);
 app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'pug');
 app.set('view engine', 'ejs')
-
-app.use(require('express-session') ({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false
-}));
-
-app.use(passport.initialize());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.use(new GoogleStrategy({
-        clientID: "276874932016-c92hlcs1csbs06vsim60gslhbjb2duv2.apps.googleusercontent.com",
-        clientSecret: "TOLJWIHjx0HdCa6i4zQehQUJ",
-        callbackURL: "http://localhost:3000/auth/google/callback"
-    },
-    function(accessToken, refreshToken, profile, cb) {
-        User.findOne({ 'google.id' : profile.id } , function (err, user) {
-            if (err) {
-                return cb(err);
-            }
-            if (!user) {
-                console.log(typeof profile._json);
-                user = new User({username: profile.displayName,
-                    provider: 'google',
-                    google:profile._json
-                });
-                user.save(function(err) {
-                    if (err) console.log(err);
-                    return cb(err, user);
-                });
-            } else {
-                return cb(err, user);
-            }
-        });
-    }
-));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -80,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/', login);
 app.use('/', hub);
+app.use('/', gallery);
 app.use('/stripe', stripe);
 
 // catch 404 and forward to error handler
@@ -94,11 +55,7 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-// To move >>
 
-
-
-// To Move <<
   //Field name and max count
 
 //
