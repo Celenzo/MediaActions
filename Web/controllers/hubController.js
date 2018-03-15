@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Photo = require('../models/hub');
+var Hub = require('../models/hub');
 
 exports.display = function(req, res)
 {
@@ -8,33 +8,47 @@ exports.display = function(req, res)
 
 exports.upload = function(req, res)
 {
-  res.send(req.files);
-};
+  res.render('hub', {title: 'Upload'});
+
+  var datapicture = {
+    originalname: req.files[0].originalname,
+    mimetype: req.files[0].mimetype,
+    destination: req.files[0].destination,
+    filename: req.files[0].filename,
+    path: req.files[0].path,
+    size: req.files[0].size,
+  }
+  //res.send(req.files.map);
+  console.log(datapicture);
 
 
-
-
-    //
-
-/*
-
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
-
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  var dbo = db.db("mydb");
-  var myobj = { name: "Company Inc", address: "Highway 37" };
-  dbo.collection("customers").insertOne(myobj, function(err, res) {
-    if (err) throw err;
-    console.log("1 document inserted");
-    db.close();
+  var HubSchm = new mongoose.Schema({
+    originalname : String,
+    mimetype : String,
+    destination : String,
+    filename : String,
+    path : String,
+    size : String,
+    date : { type : Date, default : Date.now }
   });
-});
-*/
-/*
-exports.display = function(req, res, next) {
 
+  // Création du Model pour les commentaires
+  var HubModel = mongoose.model('commentaires', HubSchm);
+
+  // On crée une instance du Model
+  var instModel = new HubModel();
+  instModel.originalname = req.files[0].originalname;
+  instModel.mimetype = req.files[0].mimetype;
+  instModel.destination = req.files[0].destination;
+  instModel.filename = req.files[0].filename;
+  instModel.path = req.files[0].path;
+  instModel.size = req.files[0].size;
+
+
+  instModel.save(function (err) {
+    if (err) {
+      res.send("ERROR UPLOAD");
+      throw err; }
+    console.log('Instance ajoutée avec succès !');
+  });
 };
-
-*/
