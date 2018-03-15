@@ -6,13 +6,7 @@ var hub_controller = require('../controllers/hubController');
 
 /* GET home page. */
 router.get('/hub', upload.any(), hub_controller.display);
-router.post('/hub', upload.any(), hub_controller.display);
+router.post('/hub', upload.any(), hub_controller.upload);
 
-
-
-
-
-
-//router.post('/hub', hub_controller.display);
 
 module.exports = router;
