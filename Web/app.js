@@ -8,7 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-process.env.PUBLISHABLE_key = "pk_test_ZJLG415DZJo8y12cI829uctz";
+process.env.PUBLISHABLE_KEY = "pk_test_ZJLG415DZJo8y12cI829uctz";
 process.env.SECRET_KEY = "sk_test_VUqtqxDUiVKKvNjw4nKX0vqf";
 
 var index = require('./routes/index');
