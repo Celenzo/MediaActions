@@ -3,7 +3,7 @@
   <h1>Inscription </h1>
   <p> Remplissez les informations pour vous inscrire </p>
 
-  <form action="/">
+  <form action="/register" method="post">
     <div class="form-group">
       <label for="email">Email address:</label>
       <input type="email" class="form-control" name="email">
@@ -22,5 +22,8 @@
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
   </form>
+<form role="form" action="/auth/google" method="get">
+  <button type="submit" class="btn btn-lg btn-primary btn-block">LOGIN with Google</button>
+</form>
 
 <%- include footer.ejs %>

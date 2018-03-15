@@ -2,9 +2,12 @@
 
   <h1> Login </h1>
   <p> Indiquez votre login et votre mot de passe </p>
-  <form action="" method="POST">
-    Email: <input type="text" name="email"><br>
+  <form action="/login" method="POST">
+    Email: <input type="text" name="username"><br>
     Password: <input type="password" name="password"><br>
     <input type="submit" value="Submit">
   </form>
+<form role="form" action="/auth/google" method="get">
+  <button type="submit" class="btn btn-lg btn-primary btn-block">LOGIN with Google</button>
+</form>
 <%- include footer.ejs %>
