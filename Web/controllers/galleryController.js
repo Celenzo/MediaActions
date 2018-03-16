@@ -33,16 +33,19 @@ Hub.find( { }, {} ).exec(function(err, Result){
   */
 
 
-    for (var i = 0; i < Result.length; i++)
-    {
-      data.originalname = Result[i]["originalname"];
-      data.mimetype = Result[i]["mimetype"];
-      data.destination = Result[i]["destination"];
-      data.filename = Result[i]["filename"];
-      data.path = Result[i]["path"];
-      data.size = Result[i]["size"];
-      data.date = Result[i]["date"];
+    for (var i = 0; i < Result.length; i++) {
+        data.originalname = Result[i]["originalname"];
+        data.mimetype = Result[i]["mimetype"];
+        data.destination = Result[i]["destination"];
+        data.filename = Result[i]["filename"];
+        data.path = Result[i]["path"];
+        data.size = Result[i]["size"];
+        data.date = Result[i]["date"];
+        data.visibleName = Result[i]["visibleName"];
+        data.description = Result[i]["description"];
+        data.price = Result[i]["price"];
     }
+
     res.render('gallery', { title: 'Media actions',
     originalname: data.originalname,
     mimetype: data.mimetype,
@@ -51,6 +54,9 @@ Hub.find( { }, {} ).exec(function(err, Result){
     path: data.path,
     size: data.size,
     date: data.date,
+    visibleName: data.visibleName,
+    description: data.description,
+    price: data.price,
     user:req.user
     });
   })

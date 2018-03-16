@@ -41,6 +41,24 @@ var HubSchema = new mongoose.Schema({
     unique: false,
     required: false,
     trim: false
+  },
+  visibleName: {
+      type: String,
+      unique: false,
+      required: false,
+      trim: true
+  },
+  description: {
+      type: String,
+      unique: false,
+      required: false,
+      trim: true
+  },
+  price: {
+      type: Number,
+      unique: false,
+      required: false,
+      trim: true
   }
 });
 
