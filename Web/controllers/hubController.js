@@ -3,11 +3,15 @@ var Hub = require('../models/hub');
 
 exports.display = function(req, res, next)
 {
-  res.render('hub', {title: 'Upload'});
+    if (req.user === 'undefined' || req.user == null)
+        res.redirect('/login');
+  res.render('hub', {title: 'Upload', user:req.user});
 };
 
 exports.upload = function(req, res, next)
 {
+    if (req.user === 'undefined' || req.user == null)
+        res.redirect('/login');
   var hubData = {
     originalname: req.files[0].originalname,
     mimetype: req.files[0].mimetype,
@@ -31,7 +35,7 @@ var hubData = {
       console.log(hub);
     }
   });
-res.render('index', {title: 'Upload'});
+res.render('index', {title: 'Upload', user:req.user});
 
 
 
