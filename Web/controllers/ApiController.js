@@ -14,7 +14,7 @@ apiController.login = function (req, res) {
 apiController.register = function (req, res) {
     if (req.body.password !== req.body.passwordConf) {
         res.code = 401;
-        return res.json([{error : 'Password don\'t match!]'}]);
+        return res.json({error : 'Password don\'t match!]'});
     }
 
     if (req.body.email &&
@@ -33,15 +33,15 @@ apiController.register = function (req, res) {
            if (error)
            {
                res.code = 401;
-               return res.json([{error: error}]);
+               return res.json({error: error});
            }
         });
         res.code = 200;
-        return res.json([{message: 'Register OK'}, {user: nuser}]);
+        return res.json({message: 'Register OK'}, {user: nuser});
     }
     else {
         res.code = 401;
-        return res.json([{error: 'One of fields is empty'}])
+        return res.json({error: 'One of fields is empty'})
     }
 };
 
