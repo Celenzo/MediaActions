@@ -11,8 +11,8 @@ function makeArray(d1, d2) {
 
 function myFunction(req, res, next)
 {
-  if (req.user === 'undefined' || req.user == null)
-    res.redirect('/login');
+  //if (req.user === 'undefined' || req.user == null)
+    //res.redirect('/login');
   //res.render('gallery', {title: 'Upload', user: req.user});
 
 Hub.find( { }, {} ).exec(function(err, Result){
@@ -32,6 +32,8 @@ Hub.find( { }, {} ).exec(function(err, Result){
   }
   */
 
+    var images = [];
+    var nb = 0;
 
     for (var i = 0; i < Result.length; i++) {
         data.originalname = Result[i]["originalname"];
@@ -44,8 +46,13 @@ Hub.find( { }, {} ).exec(function(err, Result){
         data.visibleName = Result[i]["visibleName"];
         data.description = Result[i]["description"];
         data.price = Result[i]["price"];
+
+        nb++;
+        images.push(data.originalname, data.mimetype, data.destination, data.filename, data.path, data.size, data.date, data.visibleName, data.description, data.price);
     }
 
+    //console.log(images);
+    console.log("size = " + images.si);
     res.render('gallery', { title: 'Media actions',
     originalname: data.originalname,
     mimetype: data.mimetype,
@@ -57,14 +64,16 @@ Hub.find( { }, {} ).exec(function(err, Result){
     visibleName: data.visibleName,
     description: data.description,
     price: data.price,
-    user:req.user
+    user:req.user,
+    data: images,
+    nbImages: nb * 10
     });
   })
 }
 
 exports.index = function(req, res, next)
 {
-    if (req.user === 'undefined' || req.user == null)
-      res.redirect('/login');
+    //if (req.user === 'undefined' || req.user == null)
+      //res.redirect('/login');
   myFunction(req, res, next);
 }
