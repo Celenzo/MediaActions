@@ -38,14 +38,11 @@ var HubSchema = new mongoose.Schema({
   },
   date: {
     type : Date,
-    default : Date.now,
     unique: false,
     required: false,
     trim: false
   }
 });
-
-
 
 var Hub = mongoose.model('Hub', HubSchema);
 module.exports = Hub;
