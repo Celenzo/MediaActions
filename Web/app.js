@@ -16,6 +16,7 @@ var login = require('./routes/login');
 var stripe = require('./routes/stripe');
 var hub = require('./routes/hub');
 var gallery = require('./routes/gallery');
+var api = require('./routes/api');
 
 var app = express();
 var mongoDB = 'mongodb://admin:admin@ds239117.mlab.com:39117/db_media_actions';
@@ -116,6 +117,7 @@ app.use('/', login);
 app.use('/', hub);
 app.use('/', gallery);
 app.use('/stripe', stripe);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
