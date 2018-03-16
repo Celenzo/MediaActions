@@ -13,7 +13,7 @@ apiController.login = function (req, res) {
 
 apiController.register = function (req, res) {
     if (req.body.password !== req.body.passwordConf) {
-        res.code = 401;
+        res.status(401);
         return res.json({error : 'Password don\'t match!]'});
     }
 
@@ -32,15 +32,15 @@ apiController.register = function (req, res) {
         User.register(nuser, req.body.password, function (error, user) {
            if (error)
            {
-               res.code = 401;
+               res.status(401);
                return res.json({error: error});
            }
         });
-        res.code = 200;
-        return res.json({message: 'Register OK'}, {user: nuser});
+        res.status(200);
+        return res.json([{message: 'Register OK'}, {user: nuser}]);
     }
     else {
-        res.code = 401;
+        res.status(401);
         return res.json({error: 'One of fields is empty'})
     }
 };
