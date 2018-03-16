@@ -19,6 +19,7 @@ exports.stripe = function(req, res, next) {
 exports.charge = function(req, res, next) {
     if (req.user === 'undefined' || req.user == null)
         res.redirect('/login');
+    "use strict";
     console.log("Test paymment");
 
     var customerName = "Pangolin";
