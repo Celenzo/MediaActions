@@ -20,6 +20,7 @@ Hub.find( { }, {} ).exec(function(err, Result){
       data.date = Result[i]["date"];
       // Traitement
     }
+
     res.render('gallery', { title: 'Media actions',
     originalname: data.originalname,
     mimetype: data.mimetype,
@@ -28,12 +29,9 @@ Hub.find( { }, {} ).exec(function(err, Result){
     path: data.path,
     size: data.size,
     date: data.date,
-
-  });
-
+    });
   })
 }
-
 
 exports.index = function(req, res, next)
 {
