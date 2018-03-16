@@ -18,6 +18,7 @@ var hub     = require('./routes/hub');
 var index   = require('./routes/index');
 var login   = require('./routes/login');
 var stripe  = require('./routes/stripe');
+var profil = require('./routes/profil');
 
 
 var app     = express();
@@ -119,6 +120,7 @@ app.use('/', gallery);
 app.use('/stripe', stripe);
 app.use('/api', api);
 app.use('/', contact);
+app.use('/', profil);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
