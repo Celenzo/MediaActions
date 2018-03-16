@@ -1,88 +1,54 @@
 var mongoose = require('mongoose');
+var Hub = require('../models/hub');
 
-exports.display = function(req, res, next)
+function myFunction(req, res, next, data)
 {
-    if (req.user === 'undefined' || req.user == null)
-        res.redirect('/login');
-  res.render('hub', {title: 'Upload', user: req.user});
-};
+  if (req.user === 'undefined' || req.user == null)
+    res.redirect('/login');
+  //res.render('gallery', {title: 'Upload', user: req.user});
 
-exports.upload = function(req, res, next)
-{
-    if (req.user === 'undefined' || req.user == null)
-        res.redirect('/login');
-  var hubData = {
-    originalname: req.files[0].originalname,
-    mimetype: req.files[0].mimetype,
-    destination: req.files[0].destination,
-    filename: req.files[0].filename,
-    path: req.files[0].path,
-    size: req.files[0].size,
-  }
-/*
-var hubData = {
-	    originalname: "pangolin",
-	}
-  */
-  Hub.create(hubData, function (error, hub) {
-    if (error) {
-      console.log("Msg : ");
-      console.log(error);
+Hub.find( { }, {} ).exec(function(err, Result){
+
+    for (var i = 0; i < Result.length; i++)
+    {
+      data.originalname = Result[i]["originalname"];
+      data.mimetype = Result[i]["mimetype"];
+      data.destination = Result[i]["destination"];
+      data.filename = Result[i]["filename"];
+      data.path = Result[i]["path"];
+      data.size = Result[i]["size"];
+      data.date = Result[i]["date"];
+      // Traitement
     }
-    else{
-      console.log('Commentaire ajouté avec succès !');
-      console.log(hub);
-    }
-  });
-res.render('index', {title: 'Upload', user:req.user});
 
-
-
-
+    res.render('gallery', { title: 'Media actions',
+    originalname: data.originalname,
+    mimetype: data.mimetype,
+    destination: data.destination,
+    filename: data.filename,
+    path: data.path,
+    size: data.size,
+    date: data.date,
+    user:req.user
+    });
+  })
 }
 
-  /*
+exports.index = function(req, res, next)
+{
+    if (req.user === 'undefined' || req.user == null)
+      res.redirect('/login');
 
-  var datapicture = {
-    originalname: req.files[0].originalname,
-    mimetype: req.files[0].mimetype,
-    destination: req.files[0].destination,
-    filename: req.files[0].filename,
-    path: req.files[0].path,
-    size: req.files[0].size,
+  //
+
+  var usersProjection = {
+    originalname: String,
+    mimetype: String,
+    destination: String,
+    filename: String,
+    path: String,
+    size: String,
+    date: String
   }
-  //res.send(req.files.map);
-  console.log(datapicture);
-
-
-
-  var HubSchm = new mongoose.Schema({
-    originalname : String,
-    mimetype : String,
-    destination : String,
-    filename : String,
-    path : String,
-    size : String,
-    date : { type : Date, default : Date.now }
-  });
-
-  // Création du Model pour les commentaires
-  var HubModel = mongoose.model('commentaires', HubSchm);
-
-  // On crée une instance du Model
-  var instModel = new HubModel();
-  instModel.originalname = req.files[0].originalname;
-  instModel.mimetype = req.files[0].mimetype;
-  instModel.destination = req.files[0].destination;
-  instModel.filename = req.files[0].filename;
-  instModel.path = req.files[0].path;
-  instModel.size = req.files[0].size;
-
-
-  instModel.save(function (err) {
-    if (err) {
-      res.send("ERROR UPLOAD");
-      throw err; }
-    console.log('Instance ajoutée avec succès !');
-  });
-  */
+  myFunction(req, res, next, usersProjection);
+}

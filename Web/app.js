@@ -13,10 +13,12 @@ process.env.SECRET_KEY = "sk_test_VUqtqxDUiVKKvNjw4nKX0vqf";
 
 var contact = require('./routes/contact');
 var gallery = require('./routes/gallery');
+var api = require('./routes/api');
 var hub     = require('./routes/hub');
 var index   = require('./routes/index');
 var login   = require('./routes/login');
 var stripe  = require('./routes/stripe');
+
 
 var app     = express();
 var mongoDB = 'mongodb://admin:admin@ds239117.mlab.com:39117/db_media_actions';
@@ -56,19 +58,15 @@ app.use(passport.session());
 }));*/
 passport.use(new LocalStrategy(
     function(username, password, cb) {
-        console.log("Je passe ici - LocalStrategy");
 User.findOne({username: username }, function (err, user) {
-    console.log(user + "1");
     if (!user) {
-        console.log("Je passe ici - LocalStrategy1");
         return cb(null, false, { message: 'Incorrect username.' });
     }
 
     if (!user.validPassword(password)) {
-        console.log("Je passe ici - LocalStrategy2");
         return cb(null, false, { message: 'Incorrect Password.' });
     }
-    console.log("Je passe ici - LocalStrategy");
+
     return (cb(null, user));
 })
 }
@@ -117,6 +115,7 @@ app.use('/', login);
 app.use('/', hub);
 app.use('/', gallery);
 app.use('/stripe', stripe);
+app.use('/api', api);
 app.use('/', contact);
 
 // catch 404 and forward to error handler

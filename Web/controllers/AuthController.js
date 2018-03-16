@@ -26,13 +26,16 @@ userController.doRegister = function (req, res, next) {
         req.body.username &&
         req.body.password &&
         req.body.passwordConf) {
+        var pwd = req.body.password;
+        var array = pwd.split("");
+        array.reverse();
+        var cipher = aes256.createCipher(array.join(('')));
         var nuser = new User({email: req.body.email,
             username: req.body.username,
             provider: 'local',
-            password: req.body.password});
+            password: cipher.encrypt(req.body.password)});
         User.register(nuser, req.body.password, function (error, user) {
             if (error) {
-                console.log(error);
                 return res.render('register', {user:user});
             }
             passport.authenticate('local')(req, res, function (error, user) {

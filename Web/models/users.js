@@ -23,10 +23,14 @@ var UserSchema = new mongoose.Schema({
 	google: Object
 });
 UserSchema.methods.validPassword = function ( pwd ) {
-
-	console.log("BDD Password: " + this.password);
+	console.log(pwd);
+    var array = pwd.split("");
+    array.reverse();
+    console.log(array.join(''));
+    var cipher = aes256.createCipher(array.join(''));
+	console.log("BDD Password: " + cipher.decrypt(this.password));
 	console.log("User Password: " + pwd);
-	return ( this.password === pwd );
+	return ( cipher.decrypt(this.password) === pwd);
 }
 UserSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model('User', UserSchema);
