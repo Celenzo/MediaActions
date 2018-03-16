@@ -11,15 +11,15 @@ exports.display = function(req, res, next)
 exports.upload = function(req, res, next)
 {
 
-    if (req.user === 'undefined' || req.user == null)
-        res.redirect('/login');
+  if (req.user === 'undefined' || req.user == null)
+      res.redirect('/login');
 
   var hubData = {
     originalname: req.files[0].originalname,
     mimetype: req.files[0].mimetype,
     destination: req.files[0].destination,
     filename: req.files[0].filename,
-    path: req.files[0].path,
+    path: "/uploads/" + req.files[0].filename,
     size: req.files[0].size,
     date: new Date()
   }

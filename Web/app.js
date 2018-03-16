@@ -48,6 +48,8 @@ app.use(require('express-session') ({
 
 app.use(passport.initialize());
 app.use(passport.session());
+var publicDir = require('path').join(__dirname,'/public');
+app.use(express.static(publicDir));
 /*passport.use(new LocalStrategy(function (username, password, done) {
     User.findOne({ username: username }, function (err, user) {
         if (err) { return done(err); }

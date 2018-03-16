@@ -1,13 +1,37 @@
 var mongoose = require('mongoose');
 var Hub = require('../models/hub');
 
-function myFunction(req, res, next, data)
+function makeArray(d1, d2) {
+    var arr = new Array(d1), i, l;
+    for(i = 0, l = d2; i < l; i++) {
+        arr[i] = new Array(d1);
+    }
+    return arr;
+}
+
+function myFunction(req, res, next)
 {
   if (req.user === 'undefined' || req.user == null)
     res.redirect('/login');
   //res.render('gallery', {title: 'Upload', user: req.user});
 
 Hub.find( { }, {} ).exec(function(err, Result){
+  var data = [
+    [String, String]
+  ]
+  console.log(data[0][0]);
+/*
+      originalname,
+      mimetype: String,
+      destination: String,
+      filename: String,
+      path: String,
+      size: String,
+      date: String
+    ]
+  }
+  */
+
 
     for (var i = 0; i < Result.length; i++)
     {
@@ -18,9 +42,7 @@ Hub.find( { }, {} ).exec(function(err, Result){
       data.path = Result[i]["path"];
       data.size = Result[i]["size"];
       data.date = Result[i]["date"];
-      // Traitement
     }
-
     res.render('gallery', { title: 'Media actions',
     originalname: data.originalname,
     mimetype: data.mimetype,
@@ -38,17 +60,5 @@ exports.index = function(req, res, next)
 {
     if (req.user === 'undefined' || req.user == null)
       res.redirect('/login');
-
-  //
-
-  var usersProjection = {
-    originalname: String,
-    mimetype: String,
-    destination: String,
-    filename: String,
-    path: String,
-    size: String,
-    date: String
-  }
-  myFunction(req, res, next, usersProjection);
+  myFunction(req, res, next);
 }
