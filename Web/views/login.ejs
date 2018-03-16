@@ -2,8 +2,8 @@
 
   <h1> Login </h1>
   <p> Indiquez votre login et votre mot de passe </p>
-  <form action="/login" method="POST">
-    Email: <input type="text" name="username"><br>
+  <form role="form" action="/login" method="post" class="form-signin">
+    Username: <input type="text" name="username" required="required"><br>
     Password: <input type="password" name="password"><br>
     <input type="submit" value="Submit">
   </form>

@@ -14,11 +14,16 @@
 <body>
   <div class="ui fixed inverted menu">
     <a href="/" class="header item"> Home </a>
+    <% if (typeof user === 'undefined') { %>
     <a href="/login" class="header item"> Login </a>
     <a href="/register" class="header item"> Register </a>
+    <% } else { %>
+    <a class="header item">Welcome <%= user.username %></a>
     <a href="/hub" class="header item"> Hub </a>
     <a href="/stripe" class="header item"> Stripe</a>
     <a href="/gallery" class="header item"> Gallery</a>
+    <a href="/logout" class="header item"> Logout </a>
+    <% } %>
   </div>
 </body>
 <br>

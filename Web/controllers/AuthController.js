@@ -1,16 +1,16 @@
 var mongoose = require("mongoose");
 var passport = require("passport");
 var User = require("../models/users");
-
+var aes256 = require('aes256');
 var userController = {};
 
 userController.home = function (req, res) {
     res.render('index', {user: req.user});
-}
+};
 
 userController.register = function (req, res) {
-    res.render('register', {user:req.user});
-}
+    res.render('register', {user: req.user});
+};
 
 userController.doRegister = function (req, res, next) {
     if (req.body.password !== req.body.passwordConf) {
@@ -28,15 +28,16 @@ userController.doRegister = function (req, res, next) {
         req.body.passwordConf) {
         var nuser = new User({email: req.body.email,
             username: req.body.username,
-            provider: 'local'});
+            provider: 'local',
+            password: req.body.password});
         User.register(nuser, req.body.password, function (error, user) {
             if (error) {
                 console.log(error);
                 return res.render('register', {user:user});
             }
             passport.authenticate('local')(req, res, function (error, user) {
-                req.session.user = user;
-                res.redirect('/');
+                req.session.user = nuser;
+                res.render('index', {user: nuser});
             });
         });
     }
@@ -49,7 +50,7 @@ userController.login = function(req, res) {
 userController.doLogin = function(req, res, next) {
     passport.authenticate('local')(req, res, function (error, user) {
         req.session.user = user;
-        res.redirect('/')
+        res.render('index', {user: req.user});
     });
 };
 
