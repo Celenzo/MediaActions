@@ -9,6 +9,36 @@ apiController.login = function (req, res) {
 
         res.json([{user: req.user}]);
     });
-}
+};
+
+apiController.register = function (req, res) {
+    if (req.body.password !== req.body.passwordConf) {
+        res.code = 401;
+        return res.json([{error : 'Password don\'t match!]'}]);
+    }
+
+    if (req.body.email &&
+        req.body.username &&
+        req.body.password &&
+        req.body.passwordConf) {
+        var nuser = new User({email: req.body.email,
+            username: req.body.username,
+            provider: 'local-android',
+            password: req.body.password});
+        User.register(nuser, req.body.password, function (error, user) {
+           if (error)
+           {
+               res.code = 401;
+               return res.json([{error: error}]);
+           }
+        });
+        res.code = 200;
+        return res.json([{message: 'Register OK'}, {user: nuser}]);
+    }
+    else {
+        res.code = 401;
+        return res.json([{error: 'One of fields is empty'}])
+    }
+};
 
 module.exports = apiController;
