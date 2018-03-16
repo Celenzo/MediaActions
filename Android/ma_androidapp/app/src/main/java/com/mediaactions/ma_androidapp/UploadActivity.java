@@ -12,26 +12,65 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import co.lujun.androidtagview.TagContainerLayout;
+import co.lujun.androidtagview.TagView;
 
 public class UploadActivity extends AppCompatActivity {
 
     public static final int GET_FROM_GALLERY = 3;
+    public List<String> tagslist = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
     }
 
     public void uploadAction(View view) {
         startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+    }
+
+
+    public void addTag(View view) {
+        EditText et = findViewById(R.id.addTagText);
+        final TagContainerLayout mTagContainerLayout = (TagContainerLayout) findViewById(R.id.tagList);
+        if (et.getText().toString() == "" || et.getText().toString().isEmpty())
+            return ;
+
+        tagslist.add(et.getText().toString());
+        mTagContainerLayout.setTags(tagslist);
+
+        mTagContainerLayout.setOnTagClickListener(new TagView.OnTagClickListener() {
+
+            @Override
+            public void onTagClick(int position, String text) {
+            }
+
+            @Override
+            public void onTagLongClick(final int position, String text) {
+
+                mTagContainerLayout.removeTag(position);
+                tagslist.remove(position);
+            }
+
+            @Override
+            public void onTagCrossClick(int position) {
+
+            }
+
+        });
+
+        et.setText("");
     }
 
     @Override
@@ -40,7 +79,7 @@ public class UploadActivity extends AppCompatActivity {
 
 
         //Detects request codes
-        if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+        if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
             Bitmap bitmap = null;
             try {
@@ -56,4 +95,5 @@ public class UploadActivity extends AppCompatActivity {
             }
         }
     }
+
 }
