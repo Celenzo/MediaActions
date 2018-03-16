@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var aes256 = require('aes256');
+
 var passportLocalMongoose = require('passport-local-mongoose');
 var UserSchema = new mongoose.Schema({
     email: {
@@ -20,5 +22,11 @@ var UserSchema = new mongoose.Schema({
     provider : String,
 	google: Object
 });
+UserSchema.methods.validPassword = function ( pwd ) {
+
+	console.log("BDD Password: " + this.password);
+	console.log("User Password: " + pwd);
+	return ( this.password === pwd );
+}
 UserSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model('User', UserSchema);
