@@ -29,6 +29,7 @@ Hub.find( { }, {} ).exec(function(err, Result){
     path: data.path,
     size: data.size,
     date: data.date,
+    user:req.user
     });
   })
 }
@@ -38,7 +39,7 @@ exports.index = function(req, res, next)
     if (req.user === 'undefined' || req.user == null)
       res.redirect('/login');
 
-  //res.render('index', {title: 'Upload', user:req.user});
+  //
 
   var usersProjection = {
     originalname: String,
