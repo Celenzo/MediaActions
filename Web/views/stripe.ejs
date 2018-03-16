@@ -3,7 +3,9 @@
 <h1>Stripe</h1>
 <form action="/stripe/charge" method="post">
     <article>
-        <label>Amount: $5.00</label>
+        <label>Montant: <%= amount / 100 %>€</label>
     </article>
-    <script class="stripe-button" src="https://checkout.stripe.com/checkout.js" data-key=<%= publishableKey %> data-locale="auto" data-description="Sample Charge" data-amount="500"></script>
+    <input type="hidden" name="amount" value=<%= amount %>>
+    <script class="stripe-button" src="https://checkout.stripe.com/checkout.js" data-currency="eur" data-key=<%= publishableKey %> data-locale="auto" data-description="Achat d'une photo" data-amount=<%= amount %>></script>
 </form>
+<%- include footer.ejs %>

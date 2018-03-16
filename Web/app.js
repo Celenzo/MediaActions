@@ -1,24 +1,26 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var multer = require('multer');
-var upload = multer({ dest: 'public/uploads/' })
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+var bodyParser      = require('body-parser');
+var cookieParser    = require('cookie-parser');
+var express         = require('express');
+var favicon         = require('serve-favicon');
+var mongoose        = require('mongoose');
+var multer          = require('multer');
+var logger          = require('morgan');
+var path            = require('path');
+var upload          = multer({ dest: 'public/uploads/' })
 
 process.env.PUBLISHABLE_KEY = "pk_test_ZJLG415DZJo8y12cI829uctz";
 process.env.SECRET_KEY = "sk_test_VUqtqxDUiVKKvNjw4nKX0vqf";
 
-var index = require('./routes/index');
-var login = require('./routes/login');
-var stripe = require('./routes/stripe');
-var hub = require('./routes/hub');
+var contact = require('./routes/contact');
 var gallery = require('./routes/gallery');
 var api = require('./routes/api');
+var hub     = require('./routes/hub');
+var index   = require('./routes/index');
+var login   = require('./routes/login');
+var stripe  = require('./routes/stripe');
 
-var app = express();
+
+var app     = express();
 var mongoDB = 'mongodb://admin:admin@ds239117.mlab.com:39117/db_media_actions';
 //var mongoDB = 'mongodb://localhost:27017/node-auth'
 mongoose.Promise = global.Promise;
@@ -31,6 +33,11 @@ var GoogleStrategy = require('passport-google-oauth2').Strategy;
 
 var User = require('./models/users');
 app.listen(4567);
+
+//////////Test contact//////////
+const nodemailer = require('nodemailer');
+
+///////////////
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -118,6 +125,7 @@ app.use('/', hub);
 app.use('/', gallery);
 app.use('/stripe', stripe);
 app.use('/api', api);
+app.use('/', contact);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
