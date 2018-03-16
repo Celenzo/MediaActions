@@ -1,3 +1,6 @@
+<%- include layout.ejs %>
+<title>Contactez-nous</title>
+<br><br>
 <form action="/contact" id="contact-form" method="post" role="form">
     <fieldset>
         <label for="name">Name &#42;</label>
@@ -9,3 +12,10 @@
         <button type="submit">Submit</button>
     </fieldset>
 </form>
+<% if (result === "error"){ %>
+<p>Erreur lors de l'envoie du message</p>
+<% } else if (result === "ok")  { %>
+<p>Nous avons bien reçu votre message. Merci!</p>
+<% }%>%>
+<br><br>
+<%- include footer.ejs %>

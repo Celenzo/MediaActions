@@ -32,11 +32,6 @@ var GoogleStrategy = require('passport-google-oauth2').Strategy;
 var User = require('./models/users');
 app.listen(4567);
 
-//////////Test contact//////////
-const nodemailer = require('nodemailer');
-
-///////////////
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'pug');

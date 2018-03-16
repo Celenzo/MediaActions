@@ -17,12 +17,14 @@
     <% if (typeof user === 'undefined') { %>
     <a href="/login" class="header item"> Login </a>
     <a href="/register" class="header item"> Register </a>
+    <a href="/contact" class="heade item"> Contact</a>
     <% } else { %>
     <a class="header item">Welcome <%= user.username %></a>
     <a href="/hub" class="header item"> Hub </a>
     <a href="/stripe" class="header item"> Stripe</a>
     <a href="/gallery" class="header item"> Gallery</a>
     <a href="/logout" class="header item"> Logout </a>
+    <a href="/contact" class="heade item"> Contact</a>
     <% } %>
   </div>
 </body>
