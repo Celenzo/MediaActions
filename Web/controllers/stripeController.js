@@ -10,14 +10,18 @@ exports.stripe = function(req, res, next) {
 
     //console.log("keypublishable = " + keyPublishable);
     //console.log("keySecret = " + keySecret);
-    res.render('stripe', { publishableKey:keyPublishable});
+    var amount = 1000;
+    res.render('stripe', { publishableKey:keyPublishable, amount:amount});
 
 };
 
 exports.charge = function(req, res, next) {
 
     console.log("Test paymment");
-    let amount = 500;
+
+    var customerName = "Pangolin";
+    var customerID = "adqfg56nk98dsd";
+    var amount = req.body.amount;
 
     stripe.customers.create({
         email: req.body.stripeEmail,
@@ -26,13 +30,9 @@ exports.charge = function(req, res, next) {
         .then(customer =>
             stripe.charges.create({
                 amount,
-                description: "Sample Charge",
-                currency: "usd",
+                description: customerName + " - " + customerID,
+                currency: "eur",
                 customer: customer.id
             }))
         .then(res.render('charge', { title: 'charge'}));
-};
-
-exports.test = function(req, res, next) {
-    res.render('stripe');
 };
