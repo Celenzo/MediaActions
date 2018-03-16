@@ -63,19 +63,15 @@ app.use(passport.session());
 }));*/
 passport.use(new LocalStrategy(
     function(username, password, cb) {
-        console.log("Je passe ici - LocalStrategy");
 User.findOne({username: username }, function (err, user) {
-    console.log(user + "1");
     if (!user) {
-        console.log("Je passe ici - LocalStrategy1");
         return cb(null, false, { message: 'Incorrect username.' });
     }
 
     if (!user.validPassword(password)) {
-        console.log("Je passe ici - LocalStrategy2");
         return cb(null, false, { message: 'Incorrect Password.' });
     }
-    console.log("Je passe ici - LocalStrategy");
+
     return (cb(null, user));
 })
 }
