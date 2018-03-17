@@ -40,15 +40,25 @@ Hub.find( { }, {} ).exec(function(err, Result){
         data.mimetype = Result[i]["mimetype"];
         data.destination = Result[i]["destination"];
         data.filename = Result[i]["filename"];
-        data.path = Result[i]["path"];
+        data.path = "<img alt=\\'Poster\\'' id=\\'poster\\' src='" + Result[i]["path"] + "'>";
         data.size = Result[i]["size"];
         data.date = Result[i]["date"];
-        data.visibleName = Result[i]["visibleName"];
+        data.visibleName = "<h3>" + (Result[i]["visibleName"]) + "<\/h3>";
         data.description = Result[i]["description"];
-        data.price = Result[i]["price"];
+        data.price = "Price: " + Result[i]["price"] + " €";
+        data.separator = "-----"
+
+        if (data.description == null)
+            data.description = "DESCRIPTION";
 
         nb++;
-        images.push(data.originalname, data.mimetype, data.destination, data.filename, data.path, data.size, data.date, data.visibleName, data.description, data.price);
+        images.push(
+            data.path,
+            data.visibleName,
+            data.description,
+            data.price,
+            data.separator
+        );
     }
 
     //console.log(images);

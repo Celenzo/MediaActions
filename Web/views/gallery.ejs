@@ -1,21 +1,13 @@
 <%- include layout.ejs %>
 
 <h1><%= title %></h1>
-
-<div>
-  <center>
-    <h1><%= originalname %></h1>
-      <h1><%= date %></h1>
-      <img alt="Poster" id="poster" src=<%= path %>>
-    <p>
-      Name: <%= visibleName %><br>
-      Description: <%= description%><br>
-      Price: <%= price%><br><br></p>
-
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="boxGallery col-lg-4 text-center">
       <% var i = 0; while (i < nbImages) { %>
-        <%= data[i] %><br>
+        <%- data[i] %><br>
       <% i++}%>
-    </center>
+    </div>
+    <div class="col-lg-4"></div>
 </div>
-
 <%- include footer.ejs %>
