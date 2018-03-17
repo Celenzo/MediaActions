@@ -1,13 +1,30 @@
 <%- include layout.ejs %>
+ <%
+        var i = 0;
+        var nb = 0;
+        while (i < nbImages) { %>
+        <% if (nb === 0) {%>
+        <div class="row">
+            <div class="col-lg-3"></div>
+        <% }%>
 
-<h1><%= title %></h1>
-<div class="row">
-    <div class="col-lg-4"></div>
-    <div class="boxGallery col-lg-4 text-center">
-      <% var i = 0; while (i < nbImages) { %>
-        <%- data[i] %><br>
-      <% i++}%>
-    </div>
-    <div class="col-lg-4"></div>
+            <% if (nb === 0 || nb === 4) {%>
+        <div class="panel panel-default col-lg-3 text-center">
+        <% } %>
+            <%- data[i] %><br>
+
+            <% if (nb === 3 || nb === 7) {%>
+        </div>
+            <% } %>
+
+        <% if (nb > 6) {%>
+            <div class="col-lg-3"></div>
+        </div>
+        <% nb = 0;
+            }
+        else {
+           nb++;
+        }%>
+    <% i++;}%>
 </div>
 <%- include footer.ejs %>
