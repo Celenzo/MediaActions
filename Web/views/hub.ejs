@@ -1,17 +1,39 @@
 <%- include layout.ejs %>
 
-<h1><%= title %></h1>
+<div class="row">
+    <div class="col-lg-4"> </div>
+    <div class="col-lg-4 text-center">
+        <h1> Upload a picture </h1>
+    </div>
+    <div class="col-lg-4"> </div>
+</div>
+<div class="row">
+    <div class="container">
+        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info" >
+                <div class="panel-heading">
+                    <div class="panel-title">Upload a picture</div>
+                </div>
+                <div style="padding-top:30px" class="panel-body" >
+                    <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                    <form method ="post" enctype="multipart/form-data" class="form-horizontal">
+                      <input type="file" class="" name="myimage" /><br>
+                      <label for="name">Name: </label>
+                      <input type="text" name="name" id="name" class="form-control" required="required" /><br>
+                      <label for="description">Description: </label>
+                      <input type="text" name="description" id="description" class="form-control" required="required" /><br>
+                      <label for="price">Price: </label>
+                      <input type="text" name="price" id="price" class="form-control" required="required" /><br>
+                      <input type="submit" class="positive huge ui button "name="submit" value="Submit"><br>
+                      </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <form method ="post" enctype="multipart/form-data">
-  <input type="file" name="myimage" /><br>
-  <label for="name">Name: </label>
-  <input type="text" name="name" id="name" required="required" /><br>
-  <label for="description">Description: </label>
-  <input type=text" name="description" id="description" required="required" /><br>
-  <label for="price">Price: </label>
-  <input type="text" name="price" id="price" required="required" /><br>
-  <input type="submit" name="submit" value="submit"><br>
-  <br>
-</form>
+
 
 <%- include footer.ejs %>
