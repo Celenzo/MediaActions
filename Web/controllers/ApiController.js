@@ -74,7 +74,7 @@ apiController.gallery = function(req, res) {
             nb++;
             images.push({Path: data.path, Name: data.visibleName, Description: data.description, Price: data.price});
         }
-        res.json(images);
+        res.json({images});
     });
 };
 
