@@ -15,7 +15,7 @@ page
 {
     display: flex;
     flex-direction: column;
-    min-height:  calc(100vh - 13.6vh);
+    min-height:  calc(100vh - 19.2vh);
 }
 footer {
 
