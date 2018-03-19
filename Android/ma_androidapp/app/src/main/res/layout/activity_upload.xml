@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mediaactions.ma_androidapp.UploadActivity"
+    tools:context="com.mediaactions.ma_androidapp.Activities.UploadActivity"
     tools:layout_editor_absoluteY="81dp">
 
     <ImageView

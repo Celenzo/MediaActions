@@ -21,11 +21,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UploadActivity"
+            android:name=".Activities.UploadActivity"
             android:label="@string/title_activity_upload"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".PhotoListActivity" />
+        <activity android:name=".Activities.PhotoListActivity" />
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.registerPage" />
     </application>

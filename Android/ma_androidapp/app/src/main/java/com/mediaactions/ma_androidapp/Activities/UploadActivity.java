@@ -1,4 +1,4 @@
-package com.mediaactions.ma_androidapp;
+package com.mediaactions.ma_androidapp.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.mediaactions.ma_androidapp.R;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
