@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var passport = require("passport");
 var User = require("../models/users");
 var aes256 = require('aes256');
-
+var Hub = require('../models/hub');
 
 
 var apiController = {};
@@ -46,6 +46,36 @@ apiController.register = function (req, res) {
         res.status(401);
         return res.json({error: 'One of fields is empty'})
     }
+};
+
+apiController.gallery = function(req, res) {
+    Hub.find ( {}, {} ).exec(function (err, Result) {
+        var data = [
+            [String, String]
+        ]
+
+        var images = [];
+        var nb = 0;
+
+        for (var i = 0; i < Result.length; i++)
+        {
+            data.originalname = Result[i]["originalname"];
+            data.mimetype = Result[i]["mimetype"];
+            data.destination = Result[i]["destination"];
+            data.filename = Result[i]["filename"];
+            data.path = Result[i]["path"];
+            data.size = Result[i]["size"];
+            data.visibleName = Result[i]["visibleName"];
+            data.description = Result[i]["description"];
+            data.price = Result[i]["price"];
+
+            if (data.description == null)
+                data.description = "null";
+            nb++;
+            images.push({Path: data.path, Name: data.visibleName, Description: data.description, Price: data.price});
+        }
+        res.json({images});
+    });
 };
 
 
