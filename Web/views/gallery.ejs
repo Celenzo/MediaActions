@@ -10,10 +10,14 @@
 
             <% if (nb === 0 || nb === 4) {%>
         <div class="panel panel-default col-lg-3 text-center">
+            <form method="POST" action="/details">
+                <input type="hidden" value=<%- data[i + 1] %> name="imageName" />
+                <button type="submit" style="visibility: hidden"><%- data[i] %></button>
+            </form>
         <% } %>
-            <%- data[i] %><br>
 
             <% if (nb === 3 || nb === 7) {%>
+            <%- data[i] %><br>
         </div>
             <% } %>
 

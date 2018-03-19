@@ -1,6 +1,11 @@
 var mongoose = require('mongoose');
 var Hub = require('../models/hub');
 
+const keyPublishable = process.env.PUBLISHABLE_KEY;
+const keySecret = process.env.SECRET_KEY;
+
+const stripe = require("stripe")(keySecret);
+
 function makeArray(d1, d2) {
     var arr = new Array(d1), i, l;
     for(i = 0, l = d2; i < l; i++) {
@@ -30,10 +35,10 @@ function myFunction(req, res, next)
             data.mimetype = Result[i]["mimetype"];
             data.destination = Result[i]["destination"];
             data.filename = Result[i]["filename"];
-            data.path = "<img alt='Poster' id='poster' style=\"height: 100%; width: 100%; min-height: 300px; max-height: 300px\" class='img-thumbnail' src='" + Result[i]["path"] + "'>";
+            data.path = "<img alt='Poster' id='poster' style=\"height: 100%; width: 100%; min-height: 300px; max-height: 300px;visibility: visible\" class='img-thumbnail' src='" + Result[i]["path"] + "'>";
             data.size = Result[i]["size"];
             data.date = Result[i]["date"];
-            data.visibleName = "<h3 class='panel-heading'>" + (Result[i]["visibleName"]) + "<\/h3>";
+            data.visibleName = Result[i]["visibleName"];
             data.description = Result[i]["description"];
             data.price = "Price: " + Result[i]["price"] + " €";
 
@@ -54,11 +59,29 @@ function myFunction(req, res, next)
         nbImages: nb * 4
         });
       })
-    }
+}
 
-    exports.index = function(req, res, next)
-    {
-        //if (req.user === 'undefined' || req.user == null)
-          //res.redirect('/login');
-      myFunction(req, res, next);
+exports.index = function(req, res, next)
+{
+    //if (req.user === 'undefined' || req.user == null)
+    //res.redirect('/login');
+    myFunction(req, res, next);
+}
+
+exports.imageDetails = function(req, res, next)
+{
+    console.log(req.body.imageName);
+    var result = findPrice(function (Result) {
+        console.log("Price = " + Result);
+        res.render('imageDetails', {publishableKey:keyPublishable, imageName: req.body.imageName, price: Result});
+        return Result;
+    }, req.body.imageName)
+}
+
+function findPrice(callback, name)
+{
+    Hub.find({visibleName: name}, {price: 1} ).exec(function(err, Result) {
+        console.log("Result = " + Result[0]["price"]);
+        callback(Result[0]["price"]);
+    })
 }

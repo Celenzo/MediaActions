@@ -1,0 +1,16 @@
+<%- include layout.ejs %>
+<div class="row">
+    <div class="col-lg-12 text-center"><h1><%= imageName %></h1></div>
+</div>
+<div class="row">
+    <div class="col-lg-12 text-center">
+    <form action="/stripe/charge" method="post">
+        <article>
+            <label>Price: <%= price %> €</label>
+        </article>
+        <input type="hidden" name="amount" value=<%= (price * 100) %>>
+        <script class="stripe-button" src="https://checkout.stripe.com/checkout.js" data-currency="eur" data-key=<%= publishableKey %> data-locale="auto" data-description="Achat d'une photo" data-amount=<%= (price * 100) %>></script>
+    </form>
+    </div>
+</div>
+<%- include footer.ejs%>
