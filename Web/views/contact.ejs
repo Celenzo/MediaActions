@@ -16,6 +16,8 @@
 <p>Erreur lors de l'envoie du message</p>
 <% } else if (result === "ok")  { %>
 <p>Nous avons bien reçu votre message. Merci!</p>
+<% } else if (result === "tooLarge")  { %>
+<p>Votre message est supérieur à 1337 caractères.</p>
 <% }%>%>
 <br><br>
 <%- include footer.ejs %>

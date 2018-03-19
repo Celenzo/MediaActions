@@ -47,6 +47,12 @@ app.use(require('express-session') ({
   saveUninitialized: false
 }));
 
+app.use(bodyParser.urlencoded({
+    parameterLimit: 100000,
+    limit: '50mb',
+    extended: true
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 var publicDir = require('path').join(__dirname,'/public');
@@ -62,15 +68,23 @@ app.use(express.static(publicDir));
 passport.use(new LocalStrategy(
     function(username, password, cb) {
 User.findOne({username: username }, function (err, user) {
-    if (!user) {
-        return cb(null, false, { message: 'Incorrect username.' });
+    if (err) {
+        console.log("error");
+        return (err);
     }
+    else
+    {
+        console.log("ca marche");
+        if (!user) {
+            app.use('/', login);
+            //return cb("login", false, {message: 'Incorrect username.'});
+        }
 
-    if (!user.validPassword(password)) {
-        return cb(null, false, { message: 'Incorrect Password.' });
+        if (!user.validPassword(password)) {
+            return cb(null, false, {message: 'Incorrect Password.'});
+        }
+        return (cb(null, user));
     }
-
-    return (cb(null, user));
 })
 }
 ));
