@@ -58,7 +58,7 @@ function myFunction(req, res, next)
 
     exports.index = function(req, res, next)
     {
-        //if (req.user === 'undefined' || req.user == null)
-          //res.redirect('/login');
+        if (req.user === 'undefined' || req.user == null)
+          res.redirect('/login');
       myFunction(req, res, next);
 }

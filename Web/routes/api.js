@@ -20,7 +20,7 @@ router.post('/register', api.register);
 
 router.post('/upload', function (req, res) {
   upload(req, res, function (err) {
-      console.log(req);
+      console.log(req.myimage);
       if (err) {
             return res.status(400).json({Error: err});
       }
