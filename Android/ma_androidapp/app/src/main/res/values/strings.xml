@@ -6,6 +6,7 @@
     <string name="title_activity_upload_page">UploadPage</string>
     <string name="title_activity_upload">UploadActivity</string>
     <string name="upload_image_btn">Choose image</string>
+    <string name="uploadAddTag">Add tag</string>
     <string name="add_tag">Add tag</string>
     <string name="price_text">price :</string>
     <string name="post_text">Post</string>
