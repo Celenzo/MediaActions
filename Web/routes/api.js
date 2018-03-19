@@ -57,4 +57,5 @@ router.post('/imgData', function (req,res) {
     });
 });
 
+router.get('/gallery', api.gallery);
 module.exports = router;
