@@ -2,6 +2,9 @@ var mongoose = require("mongoose");
 var passport = require("passport");
 var User = require("../models/users");
 var aes256 = require('aes256');
+
+
+
 var apiController = {};
 
 apiController.login = function (req, res) {
@@ -44,5 +47,6 @@ apiController.register = function (req, res) {
         return res.json({error: 'One of fields is empty'})
     }
 };
+
 
 module.exports = apiController;
