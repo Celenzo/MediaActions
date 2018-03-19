@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mediaactions.ma_androidapp.R;
 import com.mediaactions.ma_androidapp.RESTClasses.ParamRest;
@@ -51,5 +52,10 @@ public class LoginActivity extends AppCompatActivity {
 
     public void openDash(User_ user) {
 
+    }
+
+    public void toasty() {
+        Toast toast = Toast.makeText(this, R.string.inpError, Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

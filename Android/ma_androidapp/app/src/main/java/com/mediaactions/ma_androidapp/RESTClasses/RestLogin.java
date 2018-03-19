@@ -2,8 +2,10 @@ package com.mediaactions.ma_androidapp.RESTClasses;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.mediaactions.ma_androidapp.Activities.LoginActivity;
+import com.mediaactions.ma_androidapp.R;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
@@ -37,6 +39,7 @@ public class RestLogin extends AsyncTask<ParamRest, Void, User> {
 
     @Override
     protected void onPostExecute(User user) {
-        mainAct.openDash(user.getUser());
+        if (null != user) { mainAct.openDash(user.getUser()); }
+        else mainAct.toasty();
     }
 }

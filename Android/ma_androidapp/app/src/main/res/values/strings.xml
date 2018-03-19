@@ -17,4 +17,10 @@
     <string name="add_tag">Add tag</string>
     <string name="price_text">price :</string>
     <string name="post_text">Post</string>
+    <string name="pwdconf">passwordConf</string>
+    <string name="pwd">password</string>
+    <string name="usr">username</string>
+    <string name="mail_s">email</string>
+    <string name="emptyFieldError">Please fill all the fields</string>
+    <string name="inpError">Input Error</string>
 </resources>
