@@ -17,9 +17,9 @@ exports.stripe = function(req, res, next) {
 };
 
 exports.charge = function(req, res, next) {
-    if (req.user === 'undefined' || req.user == null)
+    /*if (req.user === 'undefined' || req.user == null)
         res.redirect('/login');
-    "use strict";
+    "use strict";*/
     console.log("Test paymment");
 
     var customerName = "Pangolin";
