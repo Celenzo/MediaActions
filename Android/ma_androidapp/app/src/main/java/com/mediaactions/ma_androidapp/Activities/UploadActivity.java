@@ -3,25 +3,20 @@ package com.mediaactions.ma_androidapp.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.mediaactions.ma_androidapp.R;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import co.lujun.androidtagview.TagContainerLayout;
 import co.lujun.androidtagview.TagView;
@@ -29,7 +24,7 @@ import co.lujun.androidtagview.TagView;
 public class UploadActivity extends AppCompatActivity {
 
     public static final int GET_FROM_GALLERY = 3;
-    public List<String> tagslist = new ArrayList<String>();
+    public List<String> tagslist = new ArrayList<>();
 
 
     @Override
@@ -45,8 +40,8 @@ public class UploadActivity extends AppCompatActivity {
 
     public void addTag(View view) {
         EditText et = findViewById(R.id.addTagText);
-        final TagContainerLayout mTagContainerLayout = (TagContainerLayout) findViewById(R.id.tagList);
-        if (et.getText().toString() == "" || et.getText().toString().isEmpty())
+        final TagContainerLayout mTagContainerLayout = findViewById(R.id.tagList);
+        if (Objects.equals(et.getText().toString(), "") || et.getText().toString().isEmpty())
             return ;
 
         tagslist.add(et.getText().toString());
@@ -83,14 +78,11 @@ public class UploadActivity extends AppCompatActivity {
         //Detects request codes
         if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
-            Bitmap bitmap = null;
+            Bitmap bitmap;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                ImageView myImageView = (ImageView) findViewById(R.id.imageView);
+                ImageView myImageView = findViewById(R.id.imageView);
                 myImageView.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

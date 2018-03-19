@@ -1,8 +1,8 @@
 package com.mediaactions.ma_androidapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -71,7 +71,9 @@ public class registerPage extends AppCompatActivity {
     }
 
     public void openDash(User_ user) {
-        Log.d("MON CUL", "SUR LA COMMODE");
+        Intent intent = new Intent(this, PhotoListActivity.class);
+        intent.putExtra("userData", user);
+        startActivity(intent);
     }
 
     public void toasty() {

@@ -1,5 +1,6 @@
 package com.mediaactions.ma_androidapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -51,7 +52,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void openDash(User_ user) {
-
+        Intent intent = new Intent(this, PhotoListActivity.class);
+        intent.putExtra("userData", user);
+        startActivity(intent);
     }
 
     public void toasty() {
