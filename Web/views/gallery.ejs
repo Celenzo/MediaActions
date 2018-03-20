@@ -1,0 +1,34 @@
+<%- include layout.ejs %>
+ <%
+        var i = 0;
+        var nb = 0;
+        while (i < nbImages) { %>
+        <% if (nb === 0) {%>
+        <div class="row">
+            <div class="col-lg-3"></div>
+        <% }%>
+
+            <% if (nb === 0 || nb === 4) {%>
+        <div class="panel panel-default col-lg-3 text-center">
+            <form method="POST" action="/details">
+                <input type="hidden" value=<%- data[i + 1] %> name="imageName" />
+                <button type="submit" style="visibility: hidden"><%- data[i] %></button>
+            </form>
+        <% } %>
+
+            <% if (nb === 3 || nb === 7) {%>
+            <%- data[i] %><br>
+        </div>
+            <% } %>
+
+        <% if (nb > 6) {%>
+            <div class="col-lg-3"></div>
+        </div>
+        <% nb = 0;
+            }
+        else {
+           nb++;
+        }%>
+    <% i++;}%>
+</div>
+<%- include footer.ejs %>

@@ -1,0 +1,11 @@
+<%- include layout.ejs %>
+
+<h1>Stripe</h1>
+<form action="/stripe/charge" method="post">
+    <article>
+        <label>Montant: <%= amount / 100 %>€</label>
+    </article>
+    <input type="hidden" name="amount" value=<%= amount %>>
+    <script class="stripe-button" src="https://checkout.stripe.com/checkout.js" data-currency="eur" data-key=<%= publishableKey %> data-locale="auto" data-description="Achat d'une photo" data-amount=<%= amount %>></script>
+</form>
+<%- include footer.ejs %>

@@ -1,0 +1,23 @@
+<%- include layout.ejs %>
+<title>Contactez-nous</title>
+<br><br>
+<form action="/contact" id="contact-form" method="post" role="form">
+    <fieldset>
+        <label for="name">Name &#42;</label>
+        <input id="name" name="name" type="text" placeholder="Your name" required="required">
+        <label for="email">Email &#42;</label>
+        <input id="email" name="email" type="text" placeholder="Your email" required="required">
+        <label for="message">Message &#42;</label>
+        <textarea id="message" name="message" placeholder="Enter your message here" rows="3" required="required"></textarea>
+        <button type="submit">Submit</button>
+    </fieldset>
+</form>
+<% if (result === "error"){ %>
+<p>Erreur lors de l'envoie du message</p>
+<% } else if (result === "ok")  { %>
+<p>Nous avons bien reçu votre message. Merci!</p>
+<% } else if (result === "tooLarge")  { %>
+<p>Votre message est supérieur à 1337 caractères.</p>
+<% }%>%>
+<br><br>
+<%- include footer.ejs %>

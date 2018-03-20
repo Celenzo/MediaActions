@@ -1,0 +1,44 @@
+<%- include layout.ejs %>
+
+<div class="row">
+    <div class="col-lg-4"> </div>
+    <div class="col-lg-4 text-center">
+        <h1> Upload a picture </h1>
+    </div>
+    <div class="col-lg-4"> </div>
+</div>
+<div class="row">
+    <div class="container">
+        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info" >
+                <div class="panel-heading">
+                    <div class="panel-title">Upload a picture</div>
+                </div>
+                <div style="padding-top:30px" class="panel-body" >
+                    <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                    <form method ="post" enctype="multipart/form-data" class="form-horizontal">
+                      <input type="file" class="" name="myimage" required="required"/><br>
+                      <label for="name">Name: </label>
+                      <input type="text" name="name" id="name" class="form-control" required="required" /><br>
+                      <label for="description">Description: </label>
+                      <input type="text" name="description" id="description" class="form-control" required="required" /><br>
+                      <label for="price">Price: </label>
+                      <input type="text" name="price" id="price" class="form-control" required="required" /><br>
+                        <div class="form-group">
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                              <label class="form-check-label" for="invalidCheck2">
+                                Agree to terms and conditions
+                              </label>
+                            </div>
+                          </div>
+                            <button class="btn btn-primary" type="submit">Submit form</button>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%- include footer.ejs %>
