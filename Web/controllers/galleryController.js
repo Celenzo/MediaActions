@@ -58,6 +58,8 @@ function myFunction(req, res, next)
         user: req.user
         });
       })
+
+
 }
 
 
@@ -73,7 +75,7 @@ exports.imageDetails = function(req, res, next)
 {
     findPrice(function (Result) {
         console.log("RESULT = " + Result[0]["_id"]);
-        res.render('imageDetails', {publishableKey:keyPublishable, imageName: req.body.imageName, price: Result[0]["price"], imageID: Result[0]["_id"]});
+        res.render('imageDetails', {publishableKey:keyPublishable, imageName: req.body.imageName, price: Result[0]["price"], imageID: Result[0]["_id"], imgPath: "<img alt='Poster' id='poster' class='img-thumbnail' src='" + Result[0]["path"] + "'>"});
         return Result;
     }, req.body.imageName)
 }
