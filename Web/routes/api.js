@@ -1,6 +1,15 @@
 var express = require('express');
 var router = express.Router();
 var Hub = require('../models/hub');
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'thuiban@gmail.com',
+        pass: 'Lecose29120'
+    }
+});
 
 var multer = require('multer');
 
@@ -20,6 +29,11 @@ router.post('/register', api.register);
 
 router.post('/upload', function (req, res) {
   upload(req, res, function (err) {
+<<<<<<< HEAD
+=======
+      console.log("Req :" + req);
+      console.log(req.myimage);
+>>>>>>> 3367143caf9e1aad6cf2c99bf95b3276551eeffd
       if (err) {
             return res.status(400).json({Error: err});
       }
