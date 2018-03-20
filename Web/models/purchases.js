@@ -1,10 +1,22 @@
 var mongoose = require('mongoose');
 var PurchasesSchema = new mongoose.Schema({
-    originalname: {
+    customerId: {
         type: String,
         unique: false,
         required: false,
-        trim: true
+        trim: false
+    },
+    imageId: {
+        type: String,
+        unique: false,
+        required: false,
+        trim: false
+    },
+    date: {
+        type : Date,
+        unique: false,
+        required: false,
+        trim: false
     }
 });
 

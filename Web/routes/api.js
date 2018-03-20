@@ -29,8 +29,6 @@ router.post('/register', api.register);
 router.post('/upload', function (req, res) {
 
   upload(req, res, function (err) {
-      console.log(req);
-      console.log(req.body.myimage);
       var file = req.body.myimage;
       var raw = new Buffer(file, 'base64');
       var name = new Date().toLocaleDateString('fr-FR')+ randomstrng.generate(12) + '.png';
@@ -59,6 +57,5 @@ router.post('/upload', function (req, res) {
       });
   })
 });
-
 router.get('/gallery', api.gallery);
 module.exports = router;

@@ -14,8 +14,6 @@ exports.upload = function(req, res, next)
   if (req.user === 'undefined' || req.user == null)
       res.redirect('/login');
 
-    console.log("log = " + req.body.name);
-
   var hubData = {
       originalname: req.files[0].originalname,
       mimetype: req.files[0].mimetype,
