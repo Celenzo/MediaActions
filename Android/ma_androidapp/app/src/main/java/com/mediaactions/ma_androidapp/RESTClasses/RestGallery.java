@@ -2,10 +2,8 @@ package com.mediaactions.ma_androidapp.RESTClasses;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.mediaactions.ma_androidapp.Activities.PhotoListActivity;
-import com.mediaactions.ma_androidapp.R;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
@@ -33,7 +31,6 @@ public class RestGallery extends AsyncTask<ParamRest, Void, ImgList>{
                     paramRest.getHttpEntity(), ImgList.class);
         }
         catch (HttpClientErrorException ignored) {
-            //act.toasty();
             return null;
         }
 
