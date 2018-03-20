@@ -28,8 +28,6 @@ UserSchema.methods.validPassword = function ( pwd ) {
     array.reverse();
     console.log(array.join(''));
     var cipher = aes256.createCipher(array.join(''));
-	console.log("BDD Password: " + cipher.decrypt(this.password));
-	console.log("User Password: " + pwd);
 	return ( cipher.decrypt(this.password) === pwd);
 }
 UserSchema.plugin(passportLocalMongoose);

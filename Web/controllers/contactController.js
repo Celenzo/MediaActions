@@ -6,7 +6,7 @@ const MAIL_PASS = "contact";
 
 exports.show = function(req, res, next) {
 
-    res.render('contact', {result: "none"});
+    res.render('contact', {result: "none", user:req.user});
 };
 
 function validateEmail(email) {
@@ -16,7 +16,6 @@ function validateEmail(email) {
 
 exports.send = function(req, res, next) {
     var email = req.body.email;
-    console.log("taille maail = " + req.body.message.length);
     if (req.body.message.length <= 1337)
     {
         if (email) {
@@ -39,22 +38,22 @@ exports.send = function(req, res, next) {
             };
             smtpTrans.sendMail(mailOpts, function (error, response) {
                 if (error) {
-                    res.render('contact', {result: "error"});
+                    res.render('contact', {result: "error", user:req.user});
                     console.log("ERROR CONTACT = " + response);
                 }
                 else {
-                    res.render('contact', {result: "ok"});
+                    res.render('contact', {result: "ok", user:req.user});
                     console.log("CONTACT OK");
                 }
             });
         }
         else {
-            res.render('contact', {result: "error"});
+            res.render('contact', {result: "error", user:req.user});
             console.log("ERROR CONTACT = " + response);
         }
     }
     else
     {
-        res.render('contact', {result: "tooLarge"});
+        res.render('contact', {result: "tooLarge", user:req.user});
     }
 };

@@ -20,7 +20,6 @@ router.post('/register', api.register);
 
 router.post('/upload', function (req, res) {
   upload(req, res, function (err) {
-      console.log(req.myimage);
       if (err) {
             return res.status(400).json({Error: err});
       }
@@ -34,7 +33,6 @@ router.post('/imgData', function (req,res) {
     var desc = req.body.description;
     var price = req.body.price;
 
-    console.log(req.body);
     var hubData = {
         originalname: dataImg.originalname,
         mimetype: dataImg.mimetype,
