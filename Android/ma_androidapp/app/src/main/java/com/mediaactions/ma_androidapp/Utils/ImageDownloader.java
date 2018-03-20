@@ -1,36 +1,45 @@
 package com.mediaactions.ma_androidapp.Utils;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.mediaactions.ma_androidapp.Activities.PhotoListActivity;
 
-public class ImageDownloader extends AsyncTask<ImgDl, Void, Void> {
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
+
+public class ImageDownloader extends AsyncTask<ImgDl, Void, ImgDl> {
+
+    @SuppressLint("StaticFieldLeak")
+    private PhotoListActivity photoListActivity;
+
+    public ImageDownloader(PhotoListActivity act) { photoListActivity = act; }
 
     @Override
-    protected Void doInBackground(ImgDl... imgDls) {
+    protected ImgDl doInBackground(ImgDl... imgDls) {
 
         ImgDl imgDl = imgDls[0];
-
-        HttpURLConnection connection;
-        InputStream input = null;
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<byte[]> responseEntity;
 
         try {
-            connection = (HttpURLConnection) new URL(imgDl.getURL()).openConnection();
-            connection.setRequestProperty("User-agent","Mozilla/4.0");
-            connection.connect();
-            input = connection.getInputStream();
-        } catch (IOException ignored) {
-
+            responseEntity = restTemplate.exchange(imgDl.getURL(), HttpMethod.GET, null, byte[].class);
+        } catch (HttpClientErrorException ignored) {
+            return null;
         }
 
-        Bitmap x = BitmapFactory.decodeStream(input);
-        imgDl.getImageView().setImageBitmap(x);
+        Bitmap x = BitmapFactory.decodeByteArray(responseEntity.getBody(), 0, responseEntity.getBody().length);
+        imgDl.setBitmap(x);
 
-        return null;
+        return imgDl;
+    }
+
+    @Override
+    protected void onPostExecute(ImgDl imgDl) {
+        photoListActivity.setElement(imgDl);
     }
 }

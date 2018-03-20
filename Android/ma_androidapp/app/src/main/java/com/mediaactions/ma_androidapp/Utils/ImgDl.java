@@ -1,22 +1,25 @@
 package com.mediaactions.ma_androidapp.Utils;
 
-import android.widget.ImageView;
+import android.graphics.Bitmap;
 
 public class ImgDl {
 
     private String URL;
-    private ImageView imageView;
+    private Bitmap bitmap;
 
-    public ImgDl(String url, ImageView imageView) {
+    public ImgDl(String url) {
         URL = url;
-        this.imageView = imageView;
-    }
-
-    ImageView getImageView() {
-        return imageView;
     }
 
     String getURL() {
         return URL;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 }

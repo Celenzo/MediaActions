@@ -47,11 +47,6 @@ public class User_ implements Serializable {
     }
 
     @JsonProperty("email")
-    public String getEmail() {
-        return email;
-    }
-
-    @JsonProperty("email")
     public void setEmail(String email) {
         this.email = email;
     }

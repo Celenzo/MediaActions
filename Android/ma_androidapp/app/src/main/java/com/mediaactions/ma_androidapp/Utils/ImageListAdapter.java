@@ -1,38 +1,39 @@
 package com.mediaactions.ma_androidapp.Utils;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.mediaactions.ma_androidapp.Activities.PhotoListActivity;
 import com.mediaactions.ma_androidapp.R;
-import com.mediaactions.ma_androidapp.RESTClasses.Image;
-import com.mediaactions.ma_androidapp.RESTClasses.ImgList;
+
+import java.util.ArrayList;
 
 public class ImageListAdapter extends BaseAdapter {
 
-    private Activity activity;
+    private PhotoListActivity activity;
     private LayoutInflater inflater;
-    private ImgList imgList;
+    private ArrayList<ImgDl> imgList;
 
-    public ImageListAdapter(Activity activity, ImgList imgItems) {
-        this.activity = activity;
+    public ImageListAdapter(PhotoListActivity photoListActivity, ArrayList<ImgDl> imgItems) {
+        this.activity = photoListActivity;
         this.imgList = imgItems;
     }
 
     @Override
     public int getCount() {
-        return imgList.getImages().size();
+        return imgList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return imgList.getImages().get(i);
+        return imgList.get(i);
     }
 
     @Override
@@ -44,6 +45,8 @@ public class ImageListAdapter extends BaseAdapter {
     @NonNull
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 
+        Log.d("POS:", String.valueOf(position));
+
         if (inflater == null)
             inflater = (LayoutInflater) activity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -53,10 +56,7 @@ public class ImageListAdapter extends BaseAdapter {
         }
 
         ImageView img = convertView.findViewById(R.id.imgItem);
-        Image d = imgList.getImages().get(position);
-
-        ImgDl imgDl = new ImgDl(R.string.siteURL + d.getPath(), img);
-        new ImageDownloader().execute(imgDl);
+        img.setImageBitmap(imgList.get(position).getBitmap());
 
         return convertView;
     }

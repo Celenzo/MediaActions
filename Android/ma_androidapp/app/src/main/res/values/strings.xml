@@ -24,5 +24,7 @@
     <string name="emptyFieldError">Please fill all the fields</string>
     <string name="inpError">Input Error</string>
     <string name="dashErr">Error loading dashboard</string>
-    <string name="siteURL">dev.media-actions.eu</string>
+    <string name="siteURL">http://dev.media-actions.eu</string>
+    <string name="imagedisplay">ImageDisplay</string>
+    <string name="imagedata">ImageData</string>
 </resources>

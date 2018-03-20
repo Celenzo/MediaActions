@@ -12,5 +12,5 @@
         app:layout_anchorGravity="bottom"
         android:layout_gravity="bottom|center_horizontal"
         android:background="#def4e3"
-        />
+        android:contentDescription="@string/imagedata" />
 </RelativeLayout>

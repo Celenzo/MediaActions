@@ -19,7 +19,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:color/transparent" />
+        app:srcCompat="@android:color/transparent"
+        android:contentDescription="@string/imagedisplay" />
 
     <Button
         android:id="@+id/uploadButton"
@@ -41,7 +42,8 @@
         android:inputType="textPersonName"
         android:text=""
         app:layout_constraintBottom_toTopOf="@+id/tagList"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="LabelFor" />
 
     <Button
         android:id="@+id/addTagButton"
@@ -91,7 +93,8 @@
         android:inputType="numberSigned"
         app:layout_constraintEnd_toEndOf="@+id/postButton"
         app:layout_constraintStart_toEndOf="@+id/priceText"
-        app:layout_constraintTop_toBottomOf="@+id/tagList" />
+        app:layout_constraintTop_toBottomOf="@+id/tagList"
+        tools:ignore="LabelFor" />
 
     <Button
         android:id="@+id/postButton"
