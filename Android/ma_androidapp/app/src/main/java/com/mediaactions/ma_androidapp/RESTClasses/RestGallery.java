@@ -4,46 +4,45 @@ import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.mediaactions.ma_androidapp.Activities.registerPage;
+import com.mediaactions.ma_androidapp.Activities.PhotoListActivity;
+import com.mediaactions.ma_androidapp.R;
 
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
-
-public class RestRegister extends AsyncTask<ParamRest, Void, User_>{
+public class RestGallery extends AsyncTask<ParamRest, Void, ImgList>{
 
     @SuppressLint("StaticFieldLeak")
-    private registerPage act;
+    private PhotoListActivity act;
 
-    public RestRegister(registerPage act) {
+    public RestGallery(PhotoListActivity act) {
         this.act = act;
     }
 
     @Override
-    protected User_ doInBackground(ParamRest... paramRests) {
+    protected ImgList doInBackground(ParamRest... paramRests) {
+
         ParamRest paramRest = paramRests[0];
+
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<List<Registration>> responseEntity;
+        ResponseEntity<ImgList> responseEntity;
 
         try {
             responseEntity = restTemplate.exchange(paramRest.getUri(), paramRest.getMth(),
-                    paramRest.getHttpEntity(), new ParameterizedTypeReference<List<Registration>>() {});
+                    paramRest.getHttpEntity(), ImgList.class);
         }
         catch (HttpClientErrorException ignored) {
+            //act.toasty();
             return null;
         }
 
-        return responseEntity.getBody().get(1).getUser();
+        return responseEntity.getBody();
     }
 
     @Override
-    protected void onPostExecute(User_ user) {
-        if (null != user) { act.openDash(user); }
-        else act.toasty();
+    public void onPostExecute(ImgList imgList) {
+        if (imgList != null)
+            act.updateDisplay(imgList);
     }
-
-
 }

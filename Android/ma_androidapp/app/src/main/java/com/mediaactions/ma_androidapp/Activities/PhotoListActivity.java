@@ -1,24 +1,62 @@
 package com.mediaactions.ma_androidapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.mediaactions.ma_androidapp.R;
-import com.mediaactions.ma_androidapp.Utils.ImageDownloader;
-import com.mediaactions.ma_androidapp.Utils.ImgDl;
+import com.mediaactions.ma_androidapp.RESTClasses.ImgList;
+import com.mediaactions.ma_androidapp.RESTClasses.ParamRest;
+import com.mediaactions.ma_androidapp.RESTClasses.RestGallery;
+import com.mediaactions.ma_androidapp.RESTClasses.User_;
+import com.mediaactions.ma_androidapp.Utils.ImageListAdapter;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 
 public class PhotoListActivity extends AppCompatActivity {
+
+    private User_ _user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_list);
 
-        final String testURL = "http://www.visualcapitalist.com/wp-content/uploads/2016/04/elon-musk-share.jpg";
-        ImageView img = findViewById(R.id.imageView3);
+        _user = (User_)getIntent().getSerializableExtra("user");
 
-        ImgDl imgDl = new ImgDl(testURL, img);
-        new ImageDownloader().execute(imgDl);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        HttpEntity httpEntity = new HttpEntity(httpHeaders);
+        ParamRest paramRest = new ParamRest(
+                Globals.galleryApiURL,
+                httpEntity,
+                HttpMethod.GET,
+                String.class
+        );
+
+        new RestGallery(this).execute(paramRest);
+    }
+
+    public void toasty() {
+        Toast toast = Toast.makeText(this, R.string.dashErr, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    public void updateDisplay(ImgList imgList) {
+        ImageListAdapter imageListAdapter = new ImageListAdapter(this, imgList);
+        ListView listView = findViewById(R.id.imgView);
+        listView.setAdapter(imageListAdapter);
+    }
+
+    public void launchUpload(View view) {
+        Intent intent = new Intent(this, UploadActivity.class);
+        intent.putExtra("user", _user);
+        startActivity(intent);
     }
 }
