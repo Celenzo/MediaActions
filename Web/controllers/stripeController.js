@@ -53,5 +53,5 @@ exports.charge = function(req, res, next) {
                 currency: "eur",
                 customer: customer.id
             }))
-        .then(res.render('purchases', {user: req.user._id}));
+        .then(res.render('index', {user: req.user._id}));
 };

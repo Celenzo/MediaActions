@@ -29,12 +29,7 @@ router.post('/register', api.register);
 router.post('/upload', function (req, res) {
 
   upload(req, res, function (err) {
-<<<<<<< HEAD
-      if (err) {
-            return res.status(400).json({Error: err});
-      }
-      return res.json(req.files[0]);
-=======
+
       var file = req.body.myimage;
       var raw = new Buffer(file, 'base64');
       var name = new Date().toLocaleDateString('fr-FR')+ randomstrng.generate(12) + '.png';
@@ -61,7 +56,6 @@ router.post('/upload', function (req, res) {
               }
           });
       });
->>>>>>> b5a21f53d7b32fbc571b8972b7e9086f7f22bcee
   })
 });
 router.get('/gallery', api.gallery);
