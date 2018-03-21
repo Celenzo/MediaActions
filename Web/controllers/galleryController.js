@@ -33,7 +33,7 @@ function myFunction(req, res, next)
             data.mimetype = Result[i]["mimetype"];
             data.destination = Result[i]["destination"];
             data.filename = Result[i]["filename"];
-            data.path = "<img alt='Poster' id='poster' style=\"height: 100%; width: 100%; min-height: 300px; max-height: 300px;visibility: visible\" class='img-thumbnail' src='" + Result[i]["path"] + "'>";
+            data.path = "<img alt='Poster' id='poster' style=\"min-height: 300px; max-height: 300px;visibility: visible\" class='img-thumbnail' src='" + Result[i]["path"] + "'>";
             data.size = Result[i]["size"];
             data.date = Result[i]["date"];
             data.visibleName = Result[i]["visibleName"];
