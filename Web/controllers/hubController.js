@@ -22,6 +22,10 @@ exports.display = function(req, res, next)
   res.render('hub', {title: 'Upload', user:req.user});
 };
 
+function checkphoto(data)
+{
+    
+}
 function checkType(data)
 {
     var n = data.mimetype.localeCompare("image/jpeg");
@@ -77,15 +81,6 @@ exports.upload = function(req, res, next)
     
     console.log("name : " + hubData.filename + "path = " + hubData.path);
     
-    /*
-    looksSame("." + hubData.path, './public/uploads/pangovic.png', function(error, equal) 
-                {
-        console.log(error);
-        console.log(equal);
-      });
-*/
-  // Verifie
-  
   upload.any();
   Hub.create(hubData, function (error, hub) {
     if (error) {
