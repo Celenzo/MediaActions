@@ -48,8 +48,7 @@ exports.upload = function(req, res, next)
     
 
   if (req.user === 'undefined' || req.user == null)
-      res.redirect('/login');
-    
+      res.redirect('/login');    
      
     console.log("log = " + req.body.name);
 
