@@ -16,8 +16,8 @@ function makeArray(d1, d2) {
 
 function myFunction(req, res, next)
 {
-  //if (req.user === 'undefined' || req.user == null)
-    //res.redirect('/login');
+  if (req.user === 'undefined' || req.user == null)
+    res.redirect('/login');
   //res.render('gallery', {title: 'Upload', user: req.user});
 
     Hub.find( { }, {} ).exec(function(err, Result){
@@ -28,14 +28,12 @@ function myFunction(req, res, next)
         var images = [];
         var nb = 0;
 
-        console.log(Result);
-
         for (var i = 0; i < Result.length; i++) {
             data.originalname = Result[i]["originalname"];
             data.mimetype = Result[i]["mimetype"];
             data.destination = Result[i]["destination"];
             data.filename = Result[i]["filename"];
-            data.path = "<img alt='Poster' id='poster' style=\"height: 100%; width: 100%; min-height: 300px; max-height: 300px;visibility: visible\" class='img-thumbnail' src='" + Result[i]["path"] + "'>";
+            data.path = "<img alt='Poster' id='poster' style=\"min-height: 300px; max-height: 300px;visibility: visible\" class='img-thumbnail' src='" + Result[i]["path"] + "'>";
             data.size = Result[i]["size"];
             data.date = Result[i]["date"];
             data.visibleName = Result[i]["visibleName"];
@@ -56,9 +54,12 @@ function myFunction(req, res, next)
 
         res.render('gallery', { title: 'Media actions',
         data: images,
-        nbImages: nb * 4
+        nbImages: nb * 4,
+        user: req.user
         });
       })
+
+
 }
 
 
@@ -72,18 +73,17 @@ function myFunction(req, res, next)
 
 exports.imageDetails = function(req, res, next)
 {
-    console.log(req.body.imageName);
-    var result = findPrice(function (Result) {
-        console.log("Price = " + Result);
-        res.render('imageDetails', {publishableKey:keyPublishable, imageName: req.body.imageName, price: Result});
+    findPrice(function (Result) {
+        console.log("RESULT = " + Result[0]["_id"]);
+        res.render('imageDetails', {publishableKey:keyPublishable, imageName: req.body.imageName, price: Result[0]["price"], imageID: Result[0]["_id"], imgPath: "<img alt='Poster' id='poster' class='img-thumbnail' src='" + Result[0]["path"] + "'>"});
         return Result;
     }, req.body.imageName)
 }
 
 function findPrice(callback, name)
 {
-    Hub.find({visibleName: name}, {price: 1} ).exec(function(err, Result) {
-        console.log("Result = " + Result[0]["price"]);
-        callback(Result[0]["price"]);
+    Hub.find({visibleName: name}, {} ).exec(function(err, Result) {
+        console.log(Result);
+        callback(Result);
     })
 }
