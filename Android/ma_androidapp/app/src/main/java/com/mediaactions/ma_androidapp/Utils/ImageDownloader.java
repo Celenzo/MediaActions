@@ -7,7 +7,10 @@ import android.os.AsyncTask;
 
 import com.mediaactions.ma_androidapp.Activities.PhotoListActivity;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -25,9 +28,12 @@ public class ImageDownloader extends AsyncTask<ImgDl, Void, ImgDl> {
         ImgDl imgDl = imgDls[0];
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<byte[]> responseEntity;
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        HttpEntity httpEntity = new HttpEntity(httpHeaders);
 
         try {
-            responseEntity = restTemplate.exchange(imgDl.getURL(), HttpMethod.GET, null, byte[].class);
+            responseEntity = restTemplate.exchange(imgDl.getURL(), HttpMethod.GET, httpEntity, byte[].class);
         } catch (HttpClientErrorException ignored) {
             return null;
         }

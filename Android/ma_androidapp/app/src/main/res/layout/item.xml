@@ -9,8 +9,7 @@
         android:id="@+id/imgItem"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        app:layout_anchorGravity="bottom"
         android:layout_gravity="bottom|center_horizontal"
-        android:background="#def4e3"
-        android:contentDescription="@string/imagedata" />
+        android:contentDescription="@string/imagedata"
+        app:layout_anchorGravity="bottom" />
 </RelativeLayout>
