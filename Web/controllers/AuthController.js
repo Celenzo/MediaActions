@@ -6,7 +6,10 @@ var userController = {};
 
 
 userController.home = function (req, res) {
+    
+       
     res.render('index', {user: req.user});
+    
 };
 
 userController.register = function (req, res) {
