@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
-var PurchasesSchema = new mongoose.Schema({
+var Schema = mongoose.Schema;
+var Hub = require('../models/hub');
+
+var PurchasesSchema = new Schema({
     customerId: {
         type: String,
         unique: false,
@@ -18,6 +21,8 @@ var PurchasesSchema = new mongoose.Schema({
         required: false,
         trim: false
     }
+    ,
+    imageValue: [{type: Schema.Types.ObjectId, ref: 'Hub' }]
 });
 
 var Purchases = mongoose.model('Purchases', PurchasesSchema);
