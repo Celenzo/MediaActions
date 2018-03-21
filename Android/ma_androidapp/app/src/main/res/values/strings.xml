@@ -23,6 +23,7 @@
     <string name="mail_s">email</string>
     <string name="emptyFieldError">Please fill all the fields</string>
     <string name="inpError">Input Error</string>
+    <string name="uploadOK">Image uploaded</string>
     <string name="dashErr">Error loading dashboard</string>
     <string name="siteURL">http://dev.media-actions.eu</string>
     <string name="imagedisplay">ImageDisplay</string>

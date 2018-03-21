@@ -1,19 +1,39 @@
 package com.mediaactions.ma_androidapp.Activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mediaactions.ma_androidapp.R;
+import com.mediaactions.ma_androidapp.RESTClasses.ParamRest;
+import com.mediaactions.ma_androidapp.RESTClasses.RestUploadImg;
 
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,12 +45,15 @@ public class UploadActivity extends AppCompatActivity {
 
     public static final int GET_FROM_GALLERY = 3;
     public List<String> tagslist = new ArrayList<>();
+    public Uri selectedImage;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
+        ImageView image = findViewById(R.id.imageView);
+        image.setImageDrawable(null);
     }
 
     public void uploadAction(View view) {
@@ -77,7 +100,7 @@ public class UploadActivity extends AppCompatActivity {
 
         //Detects request codes
         if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
-            Uri selectedImage = data.getData();
+            selectedImage = data.getData();
             Bitmap bitmap;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
@@ -90,4 +113,55 @@ public class UploadActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
+    public void Post(View view) {
+        EditText editprice = findViewById(R.id.editPrice);
+        ImageView image = findViewById(R.id.imageView);
+        TextView alertext = findViewById(R.id.alertText);
+        if (image.getDrawable() == null) {
+            alertext.setText("Image missing");
+            return;
+        }
+        if (editprice.getText().toString().isEmpty()) {
+            alertext.setText("Price missing");
+            return;
+        }
+
+        Bitmap bm = ((BitmapDrawable)image.getDrawable()).getBitmap();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte[] b = baos.toByteArray();
+        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
+
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
+        MultiValueMap<String, Object> map= new LinkedMultiValueMap<>();
+        map.add("myimage", encImage);
+        map.add("titre", "attends je l'ai pas encore mis");
+        map.add("tags", tagslist.toString());
+        map.add("price", editprice.getText().toString());
+        HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(map, httpHeaders);
+        ParamRest paramRest = new ParamRest(
+                "http://10.29.126.7:3000/api/upload",
+                entity,
+                HttpMethod.POST,
+                null
+        );
+
+        new RestUploadImg(this).execute(paramRest);
+
+        finish();
+    }
+
+    public void toasty() {
+        Toast toast = Toast.makeText(this, R.string.inpError, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    public void dispOk() {
+        Toast toast = Toast.makeText(this, R.string.uploadOK, Toast.LENGTH_SHORT);
+        toast.show();
+    }
 }
