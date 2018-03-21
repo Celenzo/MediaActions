@@ -7,6 +7,9 @@ var multer          = require('multer');
 var logger          = require('morgan');
 var path            = require('path');
 var upload          = multer({ dest: 'public/uploads/' })
+var looksSame       = require('looks-same');
+var Jimp            = require("jimp");
+var fs = require('fs');
 
 process.env.PUBLISHABLE_KEY = "pk_test_ZJLG415DZJo8y12cI829uctz";
 process.env.SECRET_KEY = "sk_test_VUqtqxDUiVKKvNjw4nKX0vqf";
@@ -39,7 +42,6 @@ app.listen(4567);
 app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'pug');
 app.set('view engine', 'ejs')
-
 
 app.use(require('express-session') ({
   secret: 'keyboard cat',

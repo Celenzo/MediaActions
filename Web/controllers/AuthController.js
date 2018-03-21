@@ -4,6 +4,7 @@ var User = require("../models/users");
 var aes256 = require('aes256');
 var userController = {};
 
+
 userController.home = function (req, res) {
     res.render('index', {user: req.user});
 };
@@ -47,6 +48,9 @@ userController.doRegister = function (req, res, next) {
 };
 
 userController.login = function(req, res) {
+        
+  
+        
     res.render('login', {user: req.user});
 };
 
