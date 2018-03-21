@@ -19,8 +19,4 @@ public class ImgList {
         return images;
     }
 
-    @JsonProperty("images")
-    public void setImages(List<Image> images) {
-        this.images = images;
-    }
 }

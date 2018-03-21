@@ -15,7 +15,7 @@ public class ImgDl {
         return URL;
     }
 
-    public Bitmap getBitmap() {
+    Bitmap getBitmap() {
         return bitmap;
     }
 

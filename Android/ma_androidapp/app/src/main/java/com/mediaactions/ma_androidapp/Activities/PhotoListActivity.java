@@ -3,7 +3,6 @@ package com.mediaactions.ma_androidapp.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -29,8 +28,6 @@ public class PhotoListActivity extends AppCompatActivity {
 
     private User_               _user;
     private ArrayList<ImgDl>    imgList;
-    private int                 _nbElems;
-    private int                 _trElems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +36,6 @@ public class PhotoListActivity extends AppCompatActivity {
 
         _user = (User_)getIntent().getSerializableExtra("user");
         imgList = new ArrayList<>();
-        _trElems = 0;
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -57,7 +53,6 @@ public class PhotoListActivity extends AppCompatActivity {
     public void updateDisplay(ImgList restImages) {
 
         List<Image> listImg = restImages.getImages();
-        _nbElems = listImg.size();
 
         for (Image img : listImg) {
             ImgDl tmp = new ImgDl(Globals.siteURL + img.getPath());
@@ -76,11 +71,8 @@ public class PhotoListActivity extends AppCompatActivity {
         if (imgDl != null)
             imgList.add(imgDl);
 
-        Log.d(String.valueOf(_trElems), String.valueOf(_nbElems));
-
         ImageListAdapter imageListAdapter = new ImageListAdapter(this, imgList);
         ListView listView = findViewById(R.id.imgView);
         listView.setAdapter(imageListAdapter);
-        _trElems = 0;
     }
 }

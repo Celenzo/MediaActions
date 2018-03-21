@@ -27,11 +27,6 @@ public class Image {
         return path;
     }
 
-    @JsonProperty("Path")
-    public void setPath(String path) {
-        this.path = path;
-    }
-
     @JsonProperty("Name")
     public String getName() {
         return name;
@@ -40,26 +35,6 @@ public class Image {
     @JsonProperty("Name")
     public void setName(String name) {
         this.name = name;
-    }
-
-    @JsonProperty("Description")
-    public String getDescription() {
-        return description;
-    }
-
-    @JsonProperty("Description")
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @JsonProperty("Price")
-    public double getPrice() {
-        return price;
-    }
-
-    @JsonProperty("Price")
-    public void setPrice(double price) {
-        this.price = price;
     }
 
 }

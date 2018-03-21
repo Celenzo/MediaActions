@@ -2,7 +2,6 @@ package com.mediaactions.ma_androidapp.RESTClasses;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.mediaactions.ma_androidapp.Activities.registerPage;
 

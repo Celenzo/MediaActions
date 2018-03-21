@@ -78,7 +78,6 @@ public class UploadActivity extends AppCompatActivity {
 
             @Override
             public void onTagLongClick(final int position, String text) {
-
                 mTagContainerLayout.removeTag(position);
                 tagslist.remove(position);
             }
