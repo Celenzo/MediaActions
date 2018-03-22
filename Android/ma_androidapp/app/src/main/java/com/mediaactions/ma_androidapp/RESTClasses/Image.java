@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import java.io.Serializable;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "Path",
@@ -11,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "Description",
         "Price"
 })
-public class Image {
+public class Image implements Serializable {
 
     @JsonProperty("Path")
     private String path;
@@ -37,4 +39,9 @@ public class Image {
         this.name = name;
     }
 
+    @JsonProperty("Description")
+    public String getDescription() { return description; }
+
+    @JsonProperty("Price")
+    public double getPrice() { return price; }
 }

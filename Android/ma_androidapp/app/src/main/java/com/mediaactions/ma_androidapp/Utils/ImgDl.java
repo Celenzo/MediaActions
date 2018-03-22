@@ -2,12 +2,18 @@ package com.mediaactions.ma_androidapp.Utils;
 
 import android.graphics.Bitmap;
 
-public class ImgDl {
+import com.mediaactions.ma_androidapp.RESTClasses.Image;
+
+import java.io.Serializable;
+
+public class ImgDl implements Serializable {
 
     private String URL;
     private Bitmap bitmap;
+    private Image image;
 
-    public ImgDl(String url) {
+    public ImgDl(String url, Image img) {
+        image = img;
         URL = url;
     }
 
@@ -15,11 +21,15 @@ public class ImgDl {
         return URL;
     }
 
-    Bitmap getBitmap() {
+    public Bitmap getBitmap() {
         return bitmap;
     }
 
     void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
+    }
+
+    public Image getImage() {
+        return image;
     }
 }
