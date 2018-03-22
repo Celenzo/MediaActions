@@ -138,12 +138,12 @@ public class UploadActivity extends AppCompatActivity {
         httpHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
         MultiValueMap<String, Object> map= new LinkedMultiValueMap<>();
         map.add("myimage", encImage);
-        map.add("titre", "attends je l'ai pas encore mis");
+        map.add("titre", "not here yet");
         map.add("tags", tagslist.toString());
         map.add("price", editprice.getText().toString());
         HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(map, httpHeaders);
         ParamRest paramRest = new ParamRest(
-                "http://10.29.126.7:3000/api/upload",
+                Globals.UploadApiURL,
                 entity,
                 HttpMethod.POST,
                 null
