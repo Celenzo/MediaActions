@@ -28,4 +28,7 @@
     <string name="siteURL">http://dev.media-actions.eu</string>
     <string name="imagedisplay">ImageDisplay</string>
     <string name="imagedata">ImageData</string>
+    <string name="sheh">sheh</string>
+    <string name="buyBtn">Buy</string>
+    <string name="backBtn">Back</string>
 </resources>

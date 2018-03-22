@@ -8,10 +8,9 @@
 
     <EditText
         android:id="@+id/userInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="313dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="36dp"
         android:ems="10"
         android:hint="@string/username"
         android:inputType="textPersonName"
@@ -20,10 +19,9 @@
 
     <EditText
         android:id="@+id/mailInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="313dp"
+        android:layout_height="46dp"
+        android:layout_marginLeft="36dp"
         android:ems="10"
         android:hint="@string/mail"
         android:inputType="textPersonName"
@@ -32,35 +30,34 @@
 
     <EditText
         android:id="@+id/pwdInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginStart="16dp"
-        android:hint="@string/password"
+        android:layout_width="313dp"
+        android:layout_height="44dp"
+        android:layout_marginLeft="36dp"
         android:ems="10"
+        android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/pwdConfInput"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <EditText
         android:id="@+id/pwdConfInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_width="313dp"
+        android:layout_height="49dp"
+        android:layout_marginLeft="36dp"
         android:ems="10"
         android:hint="@string/confirm_password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.569" />
+        app:layout_constraintVertical_bias="0.367" />
 
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="28dp"
         android:onClick="registerBtnClick"
         android:text="@string/register"
         app:layout_constraintLeft_toLeftOf="parent"

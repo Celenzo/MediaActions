@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.mediaactions.ma_androidapp.R;
@@ -55,7 +56,7 @@ public class PhotoListActivity extends AppCompatActivity {
         List<Image> listImg = restImages.getImages();
 
         for (Image img : listImg) {
-            ImgDl tmp = new ImgDl(Globals.siteURL + img.getPath());
+            ImgDl tmp = new ImgDl(Globals.siteURL + img.getPath(), img);
             new ImageDownloader(this).execute(tmp);
         }
     }
@@ -74,5 +75,17 @@ public class PhotoListActivity extends AppCompatActivity {
         ImageListAdapter imageListAdapter = new ImageListAdapter(this, imgList);
         ListView listView = findViewById(R.id.imgView);
         listView.setAdapter(imageListAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(PhotoListActivity.this, ViewActivity.class);
+                Globals.transferBmp = imgList.get(i).getBitmap();
+                intent.putExtra("user", _user);
+                intent.putExtra("imgdata", imgList.get(i).getImage());
+                startActivity(intent);
+            }
+        });
+
     }
 }
