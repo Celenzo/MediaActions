@@ -1,5 +1,6 @@
 package com.mediaactions.ma_androidapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -35,6 +36,15 @@ public class ViewActivity extends AppCompatActivity {
     }
 
     public void backBuyBtnClick(View view) {
+        finishWithCode(0);
+    }
+
+    private void finishWithCode(int i) {
+        Intent intent = new Intent();
+        intent.putExtra("NB_1", 0);
+        intent.putExtra("NB_2", i);
+        setResult(RESULT_OK, intent);
+
         finish();
     }
 }

@@ -151,6 +151,15 @@ public class UploadActivity extends AppCompatActivity {
 
         new RestUploadImg(this).execute(paramRest);
 
+        finishWithCode(0);
+    }
+
+    private void finishWithCode(int i) {
+        Intent intent = new Intent();
+        intent.putExtra("NB_1", 0);
+        intent.putExtra("NB_2", i);
+        setResult(RESULT_OK, intent);
+
         finish();
     }
 

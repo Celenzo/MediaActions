@@ -37,7 +37,10 @@ public class PhotoListActivity extends AppCompatActivity {
 
         _user = (User_)getIntent().getSerializableExtra("user");
         imgList = new ArrayList<>();
+        realUpdate();
+    }
 
+    public void realUpdate() {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         HttpEntity httpEntity = new HttpEntity(httpHeaders);
@@ -64,7 +67,13 @@ public class PhotoListActivity extends AppCompatActivity {
     public void launchUpload(View view) {
         Intent intent = new Intent(this, UploadActivity.class);
         intent.putExtra("user", _user);
-        startActivity(intent);
+        startActivityForResult(intent, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int rq, int rc, Intent data) {
+        imgList.clear();
+        realUpdate();
     }
 
     public void setElement(ImgDl imgDl) {
@@ -83,7 +92,7 @@ public class PhotoListActivity extends AppCompatActivity {
                 Globals.transferBmp = imgList.get(i).getBitmap();
                 intent.putExtra("user", _user);
                 intent.putExtra("imgdata", imgList.get(i).getImage());
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
