@@ -34,7 +34,7 @@
             android:name=".Activities.LoginActivity"
             tools:ignore="InnerclassSeparator" />
         <activity
-            android:name=".Activities.registerPage"
+            android:name=".Activities.RegisterPage"
             tools:ignore="InnerclassSeparator" />
         <activity android:name=".Activities.ViewActivity"></activity>
     </application>

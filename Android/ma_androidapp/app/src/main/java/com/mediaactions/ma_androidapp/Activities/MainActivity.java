@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void registerBtnFn(View view) {
-        Intent intent = new Intent(this, registerPage.class);
+        Intent intent = new Intent(this, RegisterPage.class);
 
         startActivityForResult(intent, 0);
     }

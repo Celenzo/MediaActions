@@ -3,7 +3,7 @@ package com.mediaactions.ma_androidapp.RESTClasses;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 
-import com.mediaactions.ma_androidapp.Activities.registerPage;
+import com.mediaactions.ma_androidapp.Activities.RegisterPage;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +15,9 @@ import java.util.List;
 public class RestRegister extends AsyncTask<ParamRest, Void, User_>{
 
     @SuppressLint("StaticFieldLeak")
-    private registerPage act;
+    private RegisterPage act;
 
-    public RestRegister(registerPage act) {
+    public RestRegister(RegisterPage act) {
         this.act = act;
     }
 
