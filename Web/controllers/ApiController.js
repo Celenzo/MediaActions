@@ -10,9 +10,10 @@ var apiController = {};
 apiController.login = function (req, res) {
     passport.authenticate('local')(req, res, function (error, user) {
 
-        res.json({user: req.user});
+        if (error) res.status(401).json({error: error});
+        else res.json({user: req.user});
     });
-};
+}; 
 
 apiController.register = function (req, res) {
     if (req.body.password !== req.body.passwordConf) {

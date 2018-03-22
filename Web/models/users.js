@@ -23,10 +23,8 @@ var UserSchema = new mongoose.Schema({
 	google: Object
 });
 UserSchema.methods.validPassword = function ( pwd ) {
-	console.log(pwd);
     var array = pwd.split("");
     array.reverse();
-    console.log(array.join(''));
     var cipher = aes256.createCipher(array.join(''));
 	return ( cipher.decrypt(this.password) === pwd);
 }

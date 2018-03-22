@@ -78,12 +78,11 @@ User.findOne({username: username }, function (err, user) {
     else
     {
         if (!user) {
-            app.use('/', login);
-            //return cb("login", false, {message: 'Incorrect username.'});
+            return cb("Incorrect username", false, {message: 'Incorrect username.'});
         }
 
         if (!user.validPassword(password)) {
-            return cb(null, false, {message: 'Incorrect Password.'});
+            return cb("Incorrect password" ,false, {message: 'Incorrect Password.'});
         }
         return (cb(null, user));
     }

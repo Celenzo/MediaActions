@@ -58,9 +58,14 @@ userController.login = function(req, res) {
 };
 
 userController.doLogin = function(req, res, next) {
-    passport.authenticate('local')(req, res, function (error, user) {
+    passport.authenticate('local', { failureRedirect: '/login', successRedirect: '/' })(req, res, function (error, user) {
+        if (error)
+        {
+            console.log(error);
+            return res.render('login', {error: error});
+        }
         req.session.user = user;
-        res.render('index', {user: req.user});
+        return res.render('index', {user: req.user});
     });
 };
 
