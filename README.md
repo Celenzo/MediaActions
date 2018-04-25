@@ -2,11 +2,7 @@
 
 Celenzo CRESPIN
 
-Theo HUIBAN
-
 Guillaume DEMAY
-
-Ludovic BARRETEAU
 
 Antoine JAHAN
 
