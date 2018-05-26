@@ -7,7 +7,7 @@ module.exports = () => {
             port: 4567
         },
         postgres: {
-            connexionString: ''
+            connectionString: 'postgres://celenzo:celenzo@127.0.0.1:5432/mediaactionsdb'
         }
     });
 }
