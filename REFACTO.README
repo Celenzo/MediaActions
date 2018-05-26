@@ -1,0 +1,21 @@
+REFACTO
+
+Le web est maintenant séparé en deux (voir trois) parties
+
+
+Le dossier web est destiné à la suppression
+
+Le Web angular sera le coté web (ET WEB UNIQUEMENT) de MediaActions
+Le Java reste le même dans le dossier Java et n'aura normalement pas à modifier ses calls API
+L' API est le serveur qui retreive dans la DB et renvoie les infos au Web et au JAVA en JSON (comme une api captain obvious)
+
+
+Changements de technos
+
+Android -- Aucun, ça reste en JAVA avec du resttemplate
+Web -- Angular -- On passe en angular pour le web, c'est plus simple que le ejs
+       	       	  On va probablement aussi utiliser ngrx store mais ça reste a voir
+API -- node -- on reste en node, mais le server passe sur hapi, et on va utiliser socket io
+//IOS -- L'ios reste en suspens pour le moment, mais si on le fait, on le fera probablement en ionic
+      	 pour éviter de payer les 100 balles pour un pauvre compte dev ios
+	 en plus comme aucun de nous n'a d'iphone on serait bien niqués pour tester en native
