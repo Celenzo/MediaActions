@@ -59,6 +59,12 @@ var HubSchema = new mongoose.Schema({
       unique: false,
       required: false,
       trim: true
+  },
+  uploader: {
+    type: String,
+    unique: false,
+    required: false,
+    trim: false
   }
 });
 
