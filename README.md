@@ -2,8 +2,6 @@
 
 Celenzo CRESPIN
 
-Guillaume DEMAY
-
 Antoine JAHAN
 
 Romain HEDOUIN
