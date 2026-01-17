@@ -13,7 +13,7 @@ Media Actions is a comprehensive media marketplace platform that allows users to
 ### 1.1 Local Authentication
 - **User Registration**
   - Create account with email, username, and password
-  - Password encryption using AES256 cipher (reversed password as cipher key)
+  - ⚠️ **CRITICAL FLAW**: Password encryption using AES256 cipher with reversed password as key (provides no security)
   - Password confirmation validation
   - Form validation for all required fields
   - Automatic login after successful registration
@@ -22,7 +22,7 @@ Media Actions is a comprehensive media marketplace platform that allows users to
 - **User Login**
   - Username and password authentication
   - Session management with Express sessions
-  - Password verification using AES256 decryption
+  - ⚠️ **CRITICAL FLAW**: Password verification using flawed AES256 decryption (reversible encryption)
   - Passport.js Local Strategy implementation
   - Routes: `GET /login`, `POST /login`
 
@@ -226,10 +226,12 @@ Media Actions is a comprehensive media marketplace platform that allows users to
   - google (Object: Google OAuth data)
 
 - **Password Management**
-  - Encryption: AES256
+  - ⚠️ **CRITICAL FLAW**: Encryption using AES256 with reversed password as cipher key
+  - **This is NOT secure** - cipher key is derivable from encrypted password
   - Cipher key: reversed password string
   - Password validation method: `validPassword()`
   - Passport-local-mongoose plugin integration
+  - **MUST replace with bcrypt/scrypt/argon2 password hashing**
 
 ---
 
@@ -246,7 +248,7 @@ Media Actions is a comprehensive media marketplace platform that allows users to
   - Accepts email, username, password, passwordConf
   - Password matching validation
   - User creation with 'local-android' provider
-  - AES256 password encryption
+  - ⚠️ **CRITICAL FLAW**: AES256 password encryption with reversed password as key (insecure)
   - Returns success message and user object
   - Error responses:
     - 401: Password mismatch
@@ -370,38 +372,74 @@ Media Actions is a comprehensive media marketplace platform that allows users to
 ### 11.1 Current Security Issues
 ⚠️ **CRITICAL SECURITY VULNERABILITIES PRESENT IN CODE:**
 
-1. **Exposed Credentials in Source Code**:
-   - MongoDB credentials hardcoded
-   - Stripe API keys in source
-   - Email credentials in source
-   - Google OAuth credentials in source
+1. **🔴 CRITICAL: Fundamentally Flawed Password Encryption**:
+   - Custom AES256 implementation uses reversed password as cipher key
+   - **This provides ZERO security** - anyone with encrypted password can derive the key
+   - Cipher key derived from password itself defeats the purpose of encryption
+   - Must be replaced with proper password hashing (bcrypt/scrypt/argon2)
+   - **IMMEDIATE REMEDIATION REQUIRED**
 
-2. **Weak Password Encryption**:
-   - Custom AES256 implementation
+2. **🔴 CRITICAL: Exposed Credentials in Source Code**:
+   - MongoDB credentials hardcoded in app.js
+   - Stripe API keys hardcoded in app.js
+   - Email credentials hardcoded in contactController.js
+   - Google OAuth credentials hardcoded in app.js
+   - **All credentials are publicly accessible in version control**
+   - **HIGH RISK of unauthorized access and data breach**
+
+3. **🔴 CRITICAL: Weak Session Secret**:
+   - Session secret "keyboard cat" is trivially weak
+   - Enables session hijacking and forgery attacks
+   - Predictable secret allows attackers to craft valid session tokens
+   - Must use cryptographically strong random secret (32+ bytes)
    - Cipher key derived from password itself
    - Not using industry-standard bcrypt/scrypt
 
-3. **No HTTPS Enforcement**:
+4. **No HTTPS Enforcement**:
    - HTTP callback URLs for OAuth
    - No SSL/TLS configuration
+   - Credentials and session data transmitted in plain text
+   - Vulnerable to man-in-the-middle attacks
 
-4. **SQL/NoSQL Injection Risk**:
+5. **SQL/NoSQL Injection Risk**:
    - Limited input sanitization
    - Direct MongoDB queries without full validation
+   - Potential for NoSQL injection attacks
 
-5. **Session Security**:
-   - Weak session secret ("keyboard cat")
+6. **Missing Security Headers**:
+   - No CSRF protection implemented
    - No secure cookie configuration
+   - No Content Security Policy
+   - No X-Frame-Options protection
 
-### 11.2 Recommendations
-- Move all credentials to environment variables
-- Implement bcrypt for password hashing
-- Add HTTPS/SSL certificates
-- Implement rate limiting
-- Add CSRF protection
-- Enhance input validation and sanitization
-- Use secure session configuration
-- Implement proper error handling without exposing internals
+7. **File Upload Security**:
+   - No file type validation
+   - No file size enforcement at application level
+   - No virus/malware scanning
+   - No file name sanitization
+
+### 11.2 Recommendations (Priority Order)
+
+**🔴 IMMEDIATE (Critical Security Issues):**
+1. Replace AES256 password encryption with bcrypt/scrypt/argon2 hashing
+2. Move ALL credentials to environment variables (.env file)
+3. Generate strong random session secret (32+ bytes)
+4. Rotate all exposed credentials (MongoDB, Stripe, Google OAuth, Email)
+5. Remove credentials from version control history
+
+**🟡 HIGH PRIORITY:**
+6. Implement HTTPS/SSL certificates
+7. Add CSRF protection middleware
+8. Configure secure session cookies (httpOnly, secure, sameSite)
+9. Implement rate limiting on authentication endpoints
+10. Add comprehensive input validation and sanitization
+
+**🟢 MEDIUM PRIORITY:**
+11. Implement file upload validation (type, size, malware scanning)
+12. Add security headers (helmet.js)
+13. Implement proper error handling without exposing internals
+14. Add logging and monitoring for security events
+15. Implement API rate limiting
 
 ---
 
