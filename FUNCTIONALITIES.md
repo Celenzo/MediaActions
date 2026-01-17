@@ -37,12 +37,12 @@ Media Actions is a comprehensive media marketplace platform that allows users to
   - Automatic user profile creation from Google data
   - OAuth2 callback handling
   - Google user data storage (profile information)
-  - Client ID: `276874932016-c92hlcs1csbs06vsim60gslhbjb2duv2.apps.googleusercontent.com`
+  - Client ID: Configured in app.js (credentials hardcoded - should use environment variables)
   - Routes: `GET /auth/google`, `GET /auth/google/callback`
 
 ### 1.3 Session Management
 - Express session with cookie-based authentication
-- Session secret: "keyboard cat"
+- Session secret: Configured in app.js (weak secret - should use strong random value)
 - Persistent sessions across requests
 - User data serialization/deserialization
 
@@ -84,7 +84,7 @@ Media Actions is a comprehensive media marketplace platform that allows users to
 ### 2.3 Storage & Database
 - **MongoDB Storage** (mLab hosted)
   - Database: `db_media_actions`
-  - Connection: `mongodb://admin:admin@ds239117.mlab.com:39117/db_media_actions`
+  - Connection: Configured in app.js (credentials hardcoded - should use environment variables)
   - Collection: `hubs`
   - Schema fields:
     - originalname (String)
@@ -139,8 +139,8 @@ Media Actions is a comprehensive media marketplace platform that allows users to
 
 ### 4.1 Stripe Configuration
 - **Test Environment**
-  - Publishable Key: `pk_test_ZJLG415DZJo8y12cI829uctz`
-  - Secret Key: `sk_test_VUqtqxDUiVKKvNjw4nKX0vqf`
+  - Publishable Key: Configured in app.js (test key - should use environment variables)
+  - Secret Key: Configured in app.js (test key - should use environment variables)
   - Currency: EUR (Euros)
 
 ### 4.2 Payment Flow
@@ -190,9 +190,7 @@ Media Actions is a comprehensive media marketplace platform that allows users to
 - **Email Configuration**
   - SMTP server: `mail.media-actions.eu`
   - Port: 587 (STARTTLS)
-  - Credentials:
-    - User: `contact@media-actions.eu`
-    - Password: `contact`
+  - Credentials: Configured in contactController.js (hardcoded - should use environment variables)
   - Uses Nodemailer for email delivery
 
 - **Contact Form Submission** (`POST /contact`)
